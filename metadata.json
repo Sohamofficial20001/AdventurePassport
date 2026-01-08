@@ -1,0 +1,7 @@
+{
+  "name": "SAP Voyager Passport",
+  "description": "An interactive passport-style application for learning SAP concepts through mini-games, featuring a badge system and visa stamp animations.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
