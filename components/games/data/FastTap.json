@@ -1,0 +1,24 @@
+{
+  "name": "Fast Tap",
+  "description": "Rapidly identify SAP and non-SAP terms",
+  "timerSeconds": 15,
+  "pointsCorrect": 10,
+  "pointsWrong":  10,
+  "winThreshold": 70,
+  "sapTerms": [
+    "BAPI", "ABAP", "HANA", "FIORI", "OData",
+    "Module", "Basis", "Cloud", "ERP", "NetWeaver",
+    "CRM", "Ariba", "S/4HANA", "UI5", "FioriLaunchpad"
+  ],
+  "dummyTerms": [
+    "Pizza", "Moon", "Forest", "Cloud-9", "C#",
+    "Java", "React", "Swift", "Banana", "Football",
+    "Sandwich", "Bicycle", "Guitar", "Mountain", "River"
+  ],
+  "ui": {
+    "startLabel": "START CHALLENGE",
+    "sapButtonLabel": "SAP TERM",
+    "notSapButtonLabel": "Not SAP",
+    "missionTitle": "Mission: Rapid Identification"
+  }
+}

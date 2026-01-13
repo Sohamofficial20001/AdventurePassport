@@ -1,0 +1,14 @@
+{
+  "steps": [
+    "Create Sales Order",
+    "Delivery / Shipping",
+    "Billing / Invoice",
+    "Payment Receipt"
+  ],
+  "ui": {
+    "title": "Arrange the Order-to-Cash Flow",
+    "instruction": "Select the steps below in the correct ERP process order.",
+    "resetLabel": "Reset",
+    "submitLabel": "Verify Process"
+  }
+}

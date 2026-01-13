@@ -1,0 +1,20 @@
+{
+  "errors": [
+    { "id": "currency", "description": "Wrong Currency Symbol" },
+    { "id": "qty", "description": "Impossible Quantity" },
+    { "id": "vendor", "description": "Missing Vendor ID" }
+  ],
+  "ui": {
+    "title": "Purchase Order Error Audit",
+    "instruction": "Tap the incorrect fields in this Purchase Order",
+    "submitLabel": "Finalize Audit"
+  },
+  "document": {
+    "poNumber": "45000123",
+    "currencyShown": "¥",
+    "currencyExpected": "USD",
+    "qtyWrong": "9,999,999",
+    "item1": "Server Chassis R1",
+    "item2": "Memory Module 32GB"
+  }
+}

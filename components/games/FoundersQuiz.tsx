@@ -1,5 +1,9 @@
 
 import React, { useState } from 'react';
+import GameMetadata from './data/FoundersQuiz.json';
+import { FoundersQuizConfig } from './types/FoundersQuiz';
+
+const config = GameMetadata as FoundersQuizConfig;
 
 export const FoundersQuiz: React.FC<{ onFinish: (win: boolean) => void }> = ({ onFinish }) => {
   const [answer, setAnswer] = useState('');
@@ -7,16 +11,16 @@ export const FoundersQuiz: React.FC<{ onFinish: (win: boolean) => void }> = ({ o
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onFinish(answer === '5');
+    onFinish(answer.trim() === config.correctAnswer);
   };
 
   return (
     <div className="w-full space-y-8 text-center">
       <div className="space-y-4">
         <h3 className="text-xl font-bold text-gray-800 leading-tight">
-          "How many founders does SAP have?"
+          "{config.question}"
         </h3>
-        <p className="text-sm text-gray-500">The journey ends with the basics of SAP's origin story.</p>
+        <p className="text-sm text-gray-500">{config.ui.subtitle}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -35,12 +39,12 @@ export const FoundersQuiz: React.FC<{ onFinish: (win: boolean) => void }> = ({ o
               onClick={() => setShowHint(true)}
               className="text-xs text-blue-600 underline font-bold"
             >
-              Need a hint?
+              {config.ui.hintButton}
             </button>
           ) : (
             <div className="p-4 bg-yellow-50 rounded-xl border border-yellow-200">
               <p className="text-sm text-yellow-800 italic">
-                "The answer is the same as the number of this game."
+                "{config.ui.hintText}."
               </p>
             </div>
           )}
@@ -50,7 +54,7 @@ export const FoundersQuiz: React.FC<{ onFinish: (win: boolean) => void }> = ({ o
           type="submit"
           className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold shadow-xl hover:bg-blue-700 transition-all"
         >
-          Submit Answer
+          {config.ui.submitLabel}
         </button>
       </form>
     </div>

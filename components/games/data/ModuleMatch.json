@@ -1,0 +1,16 @@
+{
+  "modules": [
+    { "id": "MM", "name": "Materials Management", "scenario": "Managing raw materials and procurement." },
+    { "id": "SD", "name": "Sales & Distribution", "scenario": "Customer orders and product delivery." },
+    { "id": "FI", "name": "Financial Accounting", "scenario": "General ledger and balance sheets." },
+    { "id": "HR", "name": "Human Resources", "scenario": "Payroll and employee life cycle." },
+    { "id": "PP", "name": "Production Planning", "scenario": "Manufacturing schedules and resources." }
+  ],
+  "ui": {
+    "feedbackSelectFirst": "Select a module first!",
+    "submitLabel": "Submit Matches"
+  },
+  "rules": {
+    "requiredCorrectToWin": 4
+  }
+}

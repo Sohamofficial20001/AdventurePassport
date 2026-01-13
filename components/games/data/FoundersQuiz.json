@@ -1,0 +1,10 @@
+{
+  "question": "How many founders does SAP have?",
+  "correctAnswer": "5",
+  "ui": {
+    "subtitle": "The journey ends with the basics of SAP's origin story.",
+    "hintButton": "Need a hint?",
+    "hintText": "The answer is the same as the number of this game.",
+    "submitLabel": "Submit Answer"
+  }
+}

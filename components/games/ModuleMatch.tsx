@@ -1,13 +1,9 @@
 
 import React, { useState } from 'react';
+import GameMetadata from './data/ModuleMatch.json';
+import { ModuleMatchConfig } from './types/ModuleMatch';
 
-const MODULES = [
-  { id: 'MM', name: 'Materials Management', scenario: 'Managing raw materials and procurement.' },
-  { id: 'SD', name: 'Sales & Distribution', scenario: 'Customer orders and product delivery.' },
-  { id: 'FI', name: 'Financial Accounting', scenario: 'General ledger and balance sheets.' },
-  { id: 'HR', name: 'Human Resources', scenario: 'Payroll and employee life cycle.' },
-  { id: 'PP', name: 'Production Planning', scenario: 'Manufacturing schedules and resources.' },
-];
+const config = GameMetadata as ModuleMatchConfig;
 
 export const ModuleMatch: React.FC<{ onFinish: (win: boolean) => void }> = ({ onFinish }) => {
   const [selectedModule, setSelectedModule] = useState<string | null>(null);
@@ -16,7 +12,7 @@ export const ModuleMatch: React.FC<{ onFinish: (win: boolean) => void }> = ({ on
 
   const handleScenarioClick = (scenarioId: string) => {
     if (!selectedModule) {
-      setFeedback('Select a module first!');
+      setFeedback(config.ui.feedbackSelectFirst);
       return;
     }
     
@@ -26,14 +22,14 @@ export const ModuleMatch: React.FC<{ onFinish: (win: boolean) => void }> = ({ on
   };
 
   const handleSubmit = () => {
-    const correctCount = MODULES.filter(m => matches[m.id] === m.id).length;
-    onFinish(correctCount >= 4);
+    const correctCount = config.modules.filter(m => matches[m.id] === m.id).length;
+    onFinish(correctCount >= config.rules.requiredCorrectToWin);
   };
 
   return (
     <div className="w-full space-y-6">
       <div className="grid grid-cols-5 gap-2">
-        {MODULES.map(m => (
+        {config.modules.map(m => (
           <button
             key={m.id}
             onClick={() => setSelectedModule(m.id)}
@@ -45,7 +41,7 @@ export const ModuleMatch: React.FC<{ onFinish: (win: boolean) => void }> = ({ on
       </div>
 
       <div className="space-y-3">
-        {MODULES.map(m => (
+        {config.modules.map(m => (
           <div 
             key={m.id}
             onClick={() => handleScenarioClick(m.id)}
@@ -67,10 +63,10 @@ export const ModuleMatch: React.FC<{ onFinish: (win: boolean) => void }> = ({ on
 
       <button
         onClick={handleSubmit}
-        disabled={Object.keys(matches).length < 5}
+        disabled={Object.keys(matches).length < config.modules.length}
         className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold disabled:opacity-50"
       >
-        Submit Matches
+        {config.ui.submitLabel}
       </button>
     </div>
   );

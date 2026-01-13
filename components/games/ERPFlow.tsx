@@ -1,12 +1,13 @@
 
 import React, { useState } from 'react';
+import GameMetadata from './data/ERPFlow.json';
+import { ERPFlowConfig } from './types/ERPFlow';
 
-const STEPS = [
-  { id: 1, text: 'Create Sales Order' },
-  { id: 2, text: 'Delivery / Shipping' },
-  { id: 3, text: 'Billing / Invoice' },
-  { id: 4, text: 'Payment Receipt' },
-];
+const gameConfig = GameMetadata as ERPFlowConfig;
+const STEPS = gameConfig.steps.map((text, index) => ({
+  id: index + 1,
+  text
+}));
 
 export const ERPFlow: React.FC<{ onFinish: (win: boolean) => void }> = ({ onFinish }) => {
   const [shuffled, setShuffled] = useState([...STEPS].sort(() => Math.random() - 0.5));
@@ -41,7 +42,7 @@ export const ERPFlow: React.FC<{ onFinish: (win: boolean) => void }> = ({ onFini
         ))}
         {userOrder.length === 0 && (
           <div className="h-28 flex items-center justify-center text-gray-400 text-xs italic">
-            Select steps below in the correct order...
+            {gameConfig.ui.instruction}
           </div>
         )}
       </div>
@@ -63,14 +64,14 @@ export const ERPFlow: React.FC<{ onFinish: (win: boolean) => void }> = ({ onFini
           onClick={handleReset}
           className="flex-1 py-3 border border-gray-300 rounded-xl font-bold text-gray-600"
         >
-          Reset
+          {gameConfig.ui.resetLabel}
         </button>
         <button
           onClick={handleSubmit}
           disabled={userOrder.length < 4}
           className="flex-[2] py-3 bg-blue-600 text-white rounded-xl font-bold disabled:opacity-50 shadow-lg"
         >
-          Verify Process
+          {gameConfig.ui.submitLabel}
         </button>
       </div>
     </div>

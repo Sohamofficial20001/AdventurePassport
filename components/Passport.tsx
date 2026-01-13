@@ -1,72 +1,152 @@
-
-import React from 'react';
+import React, { useMemo } from 'react';
 import { UserProgress, GameStatus, GAMES_DATA, GameMetadata } from '../types';
 import { Stamp } from './Stamp';
+import Avatar from 'boring-avatars';
 
 interface PassportProps {
   user: UserProgress;
   onOpenGame: (game: GameMetadata) => void;
   onLogout: () => void;
 }
+const generateEmailId6 = (email: string): string => {
+  // FNV-1a hash
+  let hash = 2166136261;
+
+  for (let i = 0; i < email.length; i++) {
+    hash ^= email.charCodeAt(i);
+    hash += (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24);
+  }
+
+  // map into 000000–999999 space
+  const sixDigit = Math.abs(hash % 1000000);
+
+  // always keep leading zeros
+  return sixDigit.toString().padStart(6, "0");
+};
+
+
+const getNameFromEmail = (email: string) => {
+  if (!email) return "";
+  return email.split("@")[0].trim();
+};
+
+const getCurrentIssueDate = () => {
+  const d = new Date();
+  const day = d.getDate().toString().padStart(2, "0");
+  const month = d.toLocaleString("en-US", { month: "short" }).toUpperCase();
+  const year = d.getFullYear();
+  return `${day} ${month} ${year}`;
+};
+
+
 
 export const Passport: React.FC<PassportProps> = ({ user, onOpenGame, onLogout }) => {
+  const passportId = useMemo(
+    () => generateEmailId6(user.userId),
+    [user.userId]
+  );
+  const nameFromEmail = useMemo(() => getNameFromEmail(user.userId), [user.userId]);
+  const issueDate = useMemo(
+    () => getCurrentIssueDate(),
+    []
+  );
+
   return (
-    <div className="relative">
-      {/* Passport Cover */}
-      <div className="bg-[#1e3a5f] rounded-xl shadow-2xl overflow-hidden border-4 border-[#c5a059] relative aspect-[3/4] flex flex-col items-center justify-between p-8">
-        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/leather.png')]"></div>
-        
-        <div className="text-center z-10">
-          <div className="text-[#c5a059] border-2 border-[#c5a059] p-2 inline-block mb-4 rounded">
-            <h2 className="text-lg font-bold tracking-[0.2em] uppercase">Enterprise</h2>
-          </div>
-          <h1 className="text-4xl font-bold text-[#c5a059] tracking-widest uppercase mb-1">Passport</h1>
-          <div className="h-1 bg-[#c5a059] w-full mt-2"></div>
-        </div>
+    <div className="relative max-w-2xl mx-auto">
+      {/* Inside Passport Page */}
+      <div className="bg-[#fdfaf1] rounded-lg shadow-2xl border border-gray-300 p-8 relative overflow-hidden">
+        {/* Subtle Background Pattern to mimic security paper */}
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
 
-        <div className="z-10 w-32 h-32 border-4 border-[#c5a059] rounded-full flex items-center justify-center">
-          <span className="text-6xl grayscale opacity-70">🌍</span>
-        </div>
-
-        <div className="text-center z-10 w-full">
-          <p className="text-[#c5a059] text-xs font-bold tracking-widest uppercase mb-4 opacity-50">SAP Voyager Program</p>
-          <div className="barcode-font text-5xl text-[#c5a059] mb-4">
-            {user.userId.split('').join(' ')}
-          </div>
-          <button 
+        {/* Header / Reset Button */}
+        <div className="flex justify-between items-start mb-6 border-b border-blue-900/20 pb-2">
+          <span className="text-[10px] font-bold text-blue-900/40 tracking-[0.3em] uppercase">Official Digital Pass</span>
+          <button
             onClick={onLogout}
-            className="text-[#c5a059] text-xs underline opacity-50 hover:opacity-100"
+            className="text-[#c5a059] text-[10px] font-bold uppercase tracking-widest hover:text-amber-700 transition-colors"
           >
-            Reset Session
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              className="w-5 h-5 stroke-[#c5a059]"
+              fill="none"
+              strokeWidth={1.8}
+            >
+              <path d="M3 12a9 9 0 1 1 9 9" />
+              <path d="M3 12l-2 2m2-2l2 2" />
+            </svg>
           </button>
         </div>
-      </div>
 
-      {/* Inside Passport Page */}
-      <div className="mt-8 bg-[#fdfaf1] rounded-lg shadow-xl border-2 border-gray-300 p-6 relative">
-        <div className="flex items-start gap-4 pb-4 border-b-2 border-gray-300 border-dashed mb-6">
-          <div className="w-24 h-32 bg-gray-200 border-2 border-gray-400 flex items-center justify-center overflow-hidden">
-             <img src={`https://picsum.photos/seed/${user.userId}/200/300`} alt="Avatar" className="w-full h-full object-cover" />
+        <div className="flex gap-8 mb-8">
+          {/* Passport Photo - Adjusted to 35x45mm ratio */}
+          <div className="flex-shrink-0">
+            <div className="w-32 h-40 bg-[#fdfaf1] flex items-center justify-center relative overflow-hidden">
+
+              <Avatar
+                size={100}
+                name={user.userId}
+                variant="beam"
+                colors={["#F94144", "#F3722C", "#F9C74F", "#90BE6D", "#577590"]}
+              />
+
+
+              {/* Overlay a subtle holographic sheen or stamp */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-50"></div>
+            </div>
           </div>
-          <div className="passport-font space-y-1 text-sm text-blue-900 flex-1">
-            <p><span className="opacity-50 text-[10px] block uppercase">Surname</span> VOYAGER</p>
-            <p><span className="opacity-50 text-[10px] block uppercase">Given Name</span> SAP ENTHUSIAST</p>
-            <p><span className="opacity-50 text-[10px] block uppercase">ID Code</span> {user.userId}</p>
-            <p><span className="opacity-50 text-[10px] block uppercase">Nationality</span> CLOUD NATIVE</p>
+
+          {/* Data Fields */}
+          <div className="flex-1 grid grid-cols-2 gap-y-4 gap-x-2">
+
+            <div className="col-span-2">
+              <label className="block text-[9px] uppercase font-bold text-blue-900/60 tracking-tighter">Name / Nom</label>
+              <span className="text-lg font-mono font-bold text-gray-800 tracking-tight uppercase">{nameFromEmail}</span>
+            </div>
+
+            <div>
+              <label className="block text-[9px] uppercase font-bold text-blue-900/60 tracking-tighter">ID Code / Code d'identification</label>
+              <span className="text-md font-mono font-bold text-gray-800 tracking-widest">{passportId}</span>
+            </div>
+
+            <div>
+              <label className="block text-[9px] uppercase font-bold text-blue-900/60 tracking-tighter">Nationality / Nationalité</label>
+              <span className="text-md font-mono font-bold text-gray-800 tracking-tight uppercase">CLOUD NATIVE</span>
+            </div>
+
+            <div>
+              <label className="block text-[9px] uppercase font-bold text-blue-900/60 tracking-tighter">Date of Issue / Date de délivrance</label>
+              <span className="text-md font-mono font-bold text-gray-800 tracking-tight uppercase">{issueDate}</span>
+            </div>
+
+            <div>
+              <label className="block text-[9px] uppercase font-bold text-blue-900/60 tracking-tighter">Authority / Autorité</label>
+              <span className="text-md font-mono font-bold text-gray-800 tracking-tight uppercase">SAP BTP</span>
+            </div>
           </div>
         </div>
 
-        <h3 className="text-center font-bold uppercase tracking-widest text-gray-500 text-xs mb-6">Visas & Endorsements</h3>
-        
-        <div className="grid grid-cols-2 gap-4">
-          {GAMES_DATA.map((game) => (
-            <Stamp 
-              key={game.id} 
-              game={game} 
-              status={user.games[game.id]} 
-              onClick={() => onOpenGame(game)}
-            />
-          ))}
+        {/* Visa Section */}
+        <div className="mt-4">
+          <h3 className="text-center font-bold uppercase tracking-[0.4em] text-gray-400 text-[10px] mb-4 border-y border-dashed border-gray-300 py-1">
+            Visas & Endorsements
+          </h3>
+          <div className="grid grid-cols-3 gap-4">
+            {GAMES_DATA.map((game) => (
+              <Stamp
+                key={game.id}
+                game={game}
+                status={user.games[game.id]}
+                onClick={() => onOpenGame(game)}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Machine Readable Zone (MRZ) */}
+        <div className="mt-8 pt-4 border-t-2 border-gray-200 font-mono text-[11px] leading-tight tracking-[0.2em] text-gray-600 opacity-80 uppercase select-none">
+          <p>P&lt;CLOUDVoyager&lt;&lt;SAP&lt;ENTHUSIAST&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</p>
+          <p>{user.userId}7&lt;&lt;8USA9001011M&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;06</p>
         </div>
       </div>
     </div>
