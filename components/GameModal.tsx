@@ -6,6 +6,7 @@ import { ERPFlow } from './games/ERPFlow';
 import { FastTap } from './games/FastTap';
 import { ErrorSpot } from './games/ErrorSpot';
 import { FoundersQuiz } from './games/FoundersQuiz';
+import { ArThrowGame } from './games/ArThrowGame';
 
 interface GameModalProps {
   game: GameMetadata;
@@ -31,12 +32,14 @@ export const GameModal: React.FC<GameModalProps> = ({ game, currentStatus, onClo
   };
 
   const renderGame = () => {
+    console.log("Opening game type:", game.type);
     switch (game.type) {
       case 'match': return <ModuleMatch onFinish={handleFinish} />;
       case 'flow': return <ERPFlow onFinish={handleFinish} />;
       case 'tap': return <FastTap onFinish={handleFinish} />;
       case 'error': return <ErrorSpot onFinish={handleFinish} />;
       case 'quiz': return <FoundersQuiz onFinish={handleFinish} />;
+      case 'ar': return <ArThrowGame onFinish={handleFinish} />;
       default: return null;
     }
   };

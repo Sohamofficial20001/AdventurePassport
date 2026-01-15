@@ -46,6 +46,7 @@ export const Passport: React.FC<PassportProps> = ({ user, onOpenGame, onLogout }
     [user.userId]
   );
   const nameFromEmail = useMemo(() => getNameFromEmail(user.userId), [user.userId]);
+  console.log("Name from email:", nameFromEmail, user, user.name);
   const issueDate = useMemo(
     () => getCurrentIssueDate(),
     []
@@ -101,7 +102,7 @@ export const Passport: React.FC<PassportProps> = ({ user, onOpenGame, onLogout }
 
             <div className="col-span-2">
               <label className="block text-[9px] uppercase font-bold text-blue-900/60 tracking-tighter">Name / Nom</label>
-              <span className="text-lg font-mono font-bold text-gray-800 tracking-tight uppercase">{nameFromEmail}</span>
+              <span className="text-lg font-mono font-bold text-gray-800 tracking-tight uppercase">{user.name}</span>
             </div>
 
             <div>

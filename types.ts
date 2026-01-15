@@ -8,6 +8,7 @@ export enum GameStatus {
 
 export interface UserProgress {
   userId: string;
+  name: string;
   games: Record<number, GameStatus>;
 }
 
@@ -16,7 +17,7 @@ export interface GameMetadata {
   title: string;
   description: string;
   icon: string;
-  type: 'match' | 'flow' | 'tap' | 'error' | 'quiz';
+  type: 'match' | 'flow' | 'tap' | 'error' | 'quiz' | 'ar';
 }
 
 export const GAMES_DATA: GameMetadata[] = [
@@ -25,4 +26,5 @@ export const GAMES_DATA: GameMetadata[] = [
   { id: 3, title: 'Term Fast Tap', description: 'Tap SAP terms quickly!', icon: '⚡', type: 'tap' },
   { id: 4, title: 'Data Detective', description: 'Spot data errors in documents.', icon: '🔍', type: 'error' },
   { id: 5, title: 'Founder Quest', description: 'A final trivia challenge.', icon: '👑', type: 'quiz' },
+  { id: 6, title: 'AR Throw', description: 'AR ball throw.', icon: '🎯', type: 'ar' },
 ];

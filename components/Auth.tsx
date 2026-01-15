@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 
 interface AuthProps {
-  onLogin: (email: string) => void;
+  onLogin: (email: string , user: string) => void;
 }
 
 export const Auth: React.FC<AuthProps> = ({ onLogin }) => {
   const [email, setEmail] = useState('');
+  const [user, setUser] = useState('');
   const [error, setError] = useState('');
 
   const isValidEmail = (value: string) => {
@@ -15,19 +16,35 @@ export const Auth: React.FC<AuthProps> = ({ onLogin }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    const trimmedUser = user.trim();
+
+    if (!trimmedUser) {
+      setError('Please enter your name');
+      return;
+    }
+
     if (isValidEmail(email)) {
-      onLogin(email.trim());
+      onLogin(email.trim(), trimmedUser);
     } else {
       setError('Please enter a valid email address');
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#00152f] p-6">
-      <div className="relative aspect-[3/4] w-full max-w-sm 
-        flex flex-col justify-between items-center
-        rounded-2xl border-4 border-[#c5a059] 
-        shadow-2xl overflow-hidden bg-[#1e3a5f] p-8">
+    <div className="min-h-screen flex items-center justify-center bg-[#00152f] p-6 sm:p-8">
+      <div
+        className="
+    relative 
+    w-full 
+    max-w-sm md:max-w-md lg:max-w-lg
+    h-[90vh] md:h-[85vh] lg:h-[80vh]
+    max-h-[1100px]
+    flex flex-col justify-between items-center
+    rounded-2xl border-4 border-[#c5a059]
+    shadow-2xl overflow-hidden bg-[#1e3a5f] p-8
+  "
+      >
+
 
         {/* leather texture overlay */}
         <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/leather.png')]" />
@@ -55,6 +72,20 @@ export const Auth: React.FC<AuthProps> = ({ onLogin }) => {
 
         {/* login form */}
         <form onSubmit={handleSubmit} className="z-10 w-full space-y-4">
+          <input
+            type="text"
+            value={user}
+            onChange={(e) => {
+              setUser(e.target.value);
+              setError('');
+            }}
+            placeholder="Enter Name"
+            className="w-full text-center text-xl py-3 
+              bg-transparent text-[#c5a059]
+              border-2 border-[#c5a059] rounded-xl
+              placeholder:text-[#c5a059]/40
+              focus:outline-none"
+          />
           <input
             type="email"
             value={email}

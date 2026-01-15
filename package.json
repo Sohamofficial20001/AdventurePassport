@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "boring-avatars": "^2.0.4",
+    "canvas-confetti": "^1.9.4",
+    "nodemailer": "^7.0.12",
+    "pdfkit": "^0.17.2",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
   },
