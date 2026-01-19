@@ -9,8 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.90.1",
     "boring-avatars": "^2.0.4",
     "canvas-confetti": "^1.9.4",
+    "framer-motion": "^12.26.2",
     "nodemailer": "^7.0.12",
     "pdfkit": "^0.17.2",
     "react": "^19.2.3",

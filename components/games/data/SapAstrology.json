@@ -1,0 +1,32 @@
+{
+    "detail": "This SAP Astrology game reflects your daily SAP career energy and role alignment using playful scenarios inspired by real project life.",
+    "questions": [
+        {
+            "id": "career-energy",
+            "title": "Your SAP career karma today suggests…",
+            "subtitle": "Spin the wheel to discover what the SAP universe has planned for you today",
+            "options": [
+                {
+                    "id": "firefighter",
+                    "label": "Firefighter Hero",
+                    "description": "You’ll fix critical issues today and save a go-live. Expect urgent calls."
+                },
+                {
+                    "id": "architect",
+                    "label": "Solution Architect",
+                    "description": "Big-picture thinking wins today. Design decisions will matter."
+                },
+                {
+                    "id": "mentor",
+                    "label": "Team Mentor",
+                    "description": "Someone will need your guidance. Your experience shines."
+                },
+                {
+                    "id": "optimizer",
+                    "label": "Performance Optimizer",
+                    "description": "You’ll streamline processes and remove bottlenecks."
+                }
+            ]
+        }
+    ]
+}

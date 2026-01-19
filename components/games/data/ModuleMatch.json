@@ -1,16 +1,98 @@
 {
-  "modules": [
-    { "id": "MM", "name": "Materials Management", "scenario": "Managing raw materials and procurement." },
-    { "id": "SD", "name": "Sales & Distribution", "scenario": "Customer orders and product delivery." },
-    { "id": "FI", "name": "Financial Accounting", "scenario": "General ledger and balance sheets." },
-    { "id": "HR", "name": "Human Resources", "scenario": "Payroll and employee life cycle." },
-    { "id": "PP", "name": "Production Planning", "scenario": "Manufacturing schedules and resources." }
-  ],
-  "ui": {
-    "feedbackSelectFirst": "Select a module first!",
-    "submitLabel": "Submit Matches"
-  },
-  "rules": {
-    "requiredCorrectToWin": 4
-  }
+  "detail": "This SAP Astrology game reflects your daily SAP career energy and role alignment using playful scenarios inspired by real project life.",
+  "topics": [
+    {
+      "id": "DATA",
+      "title": "Data",
+      "question": "Which of the following are structured data?",
+      "options": [
+        {
+          "id": "o1",
+          "text": "CSV files",
+          "isCorrect": true
+        },
+        {
+          "id": "o2",
+          "text": "Images",
+          "isCorrect": false
+        },
+        {
+          "id": "o3",
+          "text": "Relational tables",
+          "isCorrect": true
+        },
+        {
+          "id": "o4",
+          "text": "Free-form text",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "AI",
+      "title": "AI",
+      "question": "Which are applications of AI?",
+      "options": [
+        {
+          "id": "o1",
+          "text": "Machine Learning",
+          "isCorrect": true
+        },
+        {
+          "id": "o2",
+          "text": "Rule-based systems",
+          "isCorrect": true
+        },
+        {
+          "id": "o3",
+          "text": "Manual data entry",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "SAP",
+      "title": "SAP",
+      "question": "Which are SAP modules?",
+      "options": [
+        {
+          "id": "o1",
+          "text": "FI",
+          "isCorrect": true
+        },
+        {
+          "id": "o2",
+          "text": "MM",
+          "isCorrect": true
+        },
+        {
+          "id": "o3",
+          "text": "Photoshop",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "ENT",
+      "title": "Enterprise",
+      "question": "What defines an enterprise system?",
+      "options": [
+        {
+          "id": "o1",
+          "text": "Cross-department integration",
+          "isCorrect": true
+        },
+        {
+          "id": "o2",
+          "text": "Standalone usage",
+          "isCorrect": false
+        },
+        {
+          "id": "o3",
+          "text": "Centralized data",
+          "isCorrect": true
+        }
+      ]
+    }
+  ]
 }

@@ -24,7 +24,7 @@ export const Stamp: React.FC<StampProps> = ({ game, status, onClick }) => {
     >
       {isPlayed && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
-          <span className="text-4xl transform rotate-12">PASSED</span>
+          <span className="text-3xl transform rotate-12">PASSED</span>
         </div>
       )}
       <span className="text-3xl mb-1">{game.icon}</span>
@@ -39,3 +39,4 @@ export const Stamp: React.FC<StampProps> = ({ game, status, onClick }) => {
     </button>
   );
 };
+ 

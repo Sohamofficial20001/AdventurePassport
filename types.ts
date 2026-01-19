@@ -9,6 +9,7 @@ export enum GameStatus {
 export interface UserProgress {
   userId: string;
   name: string;
+  isAdmin?: boolean;
   games: Record<number, GameStatus>;
 }
 
@@ -17,7 +18,7 @@ export interface GameMetadata {
   title: string;
   description: string;
   icon: string;
-  type: 'match' | 'flow' | 'tap' | 'error' | 'quiz' | 'ar';
+  type: 'match' | 'flow' | 'tap' | 'error' | 'quiz' | 'ar' | 'astrology' | 'maze';
 }
 
 export const GAMES_DATA: GameMetadata[] = [
@@ -27,4 +28,7 @@ export const GAMES_DATA: GameMetadata[] = [
   { id: 4, title: 'Data Detective', description: 'Spot data errors in documents.', icon: '🔍', type: 'error' },
   { id: 5, title: 'Founder Quest', description: 'A final trivia challenge.', icon: '👑', type: 'quiz' },
   { id: 6, title: 'AR Throw', description: 'AR ball throw.', icon: '🎯', type: 'ar' },
+  { id: 7, title: 'SAP Astrology', description: 'SAP Astrology Wheel.', icon: '🔮', type: 'astrology' },
+  { id: 8, title: 'Maze Airplane', description: 'Navigate the airplane through a maze.', icon: '✈️', type: 'maze' },
+
 ];

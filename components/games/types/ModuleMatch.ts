@@ -1,14 +1,14 @@
 export interface ModuleMatchConfig {
-  modules: Array<{
+  topics: Topic[];
+}
+
+export interface Topic {
+  id: string;
+  title: string;
+  question: string;
+  options: {
     id: string;
-    name: string;
-    scenario: string;
-  }>;
-  ui: {
-    feedbackSelectFirst: string;
-    submitLabel: string;
-  };
-  rules: {
-    requiredCorrectToWin: number;
-  };
+    text: string;
+    isCorrect: boolean;
+  }[];
 }

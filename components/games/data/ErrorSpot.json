@@ -1,20 +1,56 @@
 {
-  "errors": [
-    { "id": "currency", "description": "Wrong Currency Symbol" },
-    { "id": "qty", "description": "Impossible Quantity" },
-    { "id": "vendor", "description": "Missing Vendor ID" }
-  ],
+  "detail": "This SAP Astrology game reflects your daily SAP career energy and role alignment using playful scenarios inspired by real project life.",
   "ui": {
     "title": "Purchase Order Error Audit",
     "instruction": "Tap the incorrect fields in this Purchase Order",
     "submitLabel": "Finalize Audit"
   },
-  "document": {
-    "poNumber": "45000123",
-    "currencyShown": "¥",
-    "currencyExpected": "USD",
-    "qtyWrong": "9,999,999",
-    "item1": "Server Chassis R1",
-    "item2": "Memory Module 32GB"
-  }
+  "scenarios": [
+    {
+      "id": "po_currency_qty",
+      "errors": [
+        "currency",
+        "qty",
+        "vendor"
+      ],
+      "document": {
+        "poNumber": "45000123",
+        "vendor": null,
+        "currencyShown": "¥",
+        "currencyExpected": "USD",
+        "items": [
+          {
+            "id": "i1",
+            "name": "Server Chassis R1",
+            "qty": "-9,999,999",
+            "errorId": "qty"
+          },
+          {
+            "id": "i2",
+            "name": "Memory Module 32GB",
+            "qty": "50"
+          }
+        ]
+      }
+    },
+    {
+      "id": "po_vendor_price",
+      "errors": [
+        "vendor"
+      ],
+      "document": {
+        "poNumber": "45000456",
+        "vendor": null,
+        "currencyShown": "$",
+        "currencyExpected": "USD",
+        "items": [
+          {
+            "id": "i1",
+            "name": "Network Switch",
+            "qty": "10"
+          }
+        ]
+      }
+    }
+  ]
 }

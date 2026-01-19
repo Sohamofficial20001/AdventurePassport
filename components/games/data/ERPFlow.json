@@ -1,13 +1,17 @@
 {
+  "detail": "This SAP Astrology game reflects your daily SAP career energy and role alignment using playful scenarios inspired by real project life.",
   "steps": [
-    "Create Sales Order",
-    "Delivery / Shipping",
-    "Billing / Invoice",
-    "Payment Receipt"
+    "Understand Business Needs",
+    "Analyze Current Processes",
+    "Design the Future Solution",
+    "Set Up and Configure the System",
+    "Build Custom Enhancements",
+    "Integrate with Other Systems",
+    "Test the End-to-End Solution"
   ],
   "ui": {
-    "title": "Arrange the Order-to-Cash Flow",
-    "instruction": "Select the steps below in the correct ERP process order.",
+    "title": "Arrange the Solution Building Process",
+    "instruction": "Select the steps in the order typically followed when building an enterprise solution.",
     "resetLabel": "Reset",
     "submitLabel": "Verify Process"
   }
