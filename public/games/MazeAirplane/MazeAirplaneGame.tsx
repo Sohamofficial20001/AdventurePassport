@@ -11,13 +11,15 @@ interface MazeAirplaneGameProps {
 
 }
 
- export const MazeAirplaneGame: React.FC<MazeAirplaneGameProps> = ({ onComplete }) => {
-//export const MazeAirplaneGame: React.FC<MazeAirplaneGameProps> = ({ onFinish }) => {
+ export const MazeAirplaneGame: React.FC<MazeAirplaneGameProps> = ({ onFinish }) => {
   const [maze, setMaze] = useState([]);
   const [player, setPlayer] = useState({ x: 0, y: 0 });
   const [targetStep, setTargetStep] = useState(0);
   const [gameStatus, setGameStatus] = useState('playing'); 
   const [scenarioData, setScenarioData] = useState(null);
+  const closeResult = () => {
+        onFinish(true);
+    };
 
   const touchStart = useRef(null);
 
@@ -202,7 +204,7 @@ interface MazeAirplaneGameProps {
           <div className="box">
             <h1>TOUCHDOWN! 🛬</h1>
             <p>Flight Plan Successfully Cleared.</p>
-            <button onClick={() => window.location.reload()}>NEW MISSION</button>
+            <button onClick={closeResult} >Continue</button>
           </div>
         </div>
       )} 
