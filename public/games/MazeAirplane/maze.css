@@ -1,0 +1,51 @@
+:root {
+  --neon: #00f2ff;
+  --bg: #0a0e14;
+  --success: #39ff14;
+}
+
+body { background: var(--bg); color: white; font-family: 'Courier New', monospace; overflow: hidden; }
+
+.aviation-app { display: flex; flex-direction: column; align-items: center; padding: 15px; }
+
+/* HUD Header */
+.hud { width: 100%; max-width: 360px; background: #151b24; padding: 15px; border: 1px solid #2a3441; border-radius: 8px; margin-bottom: 15px; text-align: center; }
+.progress { display: flex; justify-content: center; gap: 5px; margin: 10px 0; }
+.seg { width: 25px; height: 5px; background: #222; }
+.seg.on { background: var(--success); box-shadow: 0 0 8px var(--success); }
+.target-info span { color: var(--neon); font-weight: bold; }
+
+/* Radar Maze */
+.radar-view { position: relative; background: #0d121b; border: 3px solid #1a1f29; }
+.r-row { display: flex; }
+.r-cell { width: 36px; height: 36px; box-sizing: border-box; position: relative; z-index: 2; border: 0.1px solid rgba(255,255,255,0.03); }
+
+/* Walls - Higher Z-index than labels */
+.tw { border-top: 2px solid var(--neon) !important; }
+.rw { border-right: 2px solid var(--neon) !important; }
+.bw { border-bottom: 2px solid var(--neon) !important; }
+.lw { border-left: 2px solid var(--neon) !important; }
+
+/* Waypoints - Behind the walls */
+.wp { font-size: 14px; text-align: center; line-height: 36px; z-index: 1; }
+.wp-name { 
+  position: absolute; bottom: 1px; left: 50%; transform: translateX(-50%); 
+  font-size: 14px; background: rgba(0,0,0,0.7); color: var(--neon); 
+  padding: 1px 1px; border-radius: 1px; white-space: nowrap; pointer-events: none; 
+}
+.wp.done { opacity: 0.2; }
+
+/* Airplane */
+.plane { position: absolute; width: 28px; height: 28px; font-size: 22px; transition: all 0.12s ease-out; z-index: 10; filter: drop-shadow(0 0 5px var(--neon)); pointer-events: none; }
+
+/* Pulse Animation for Current Target */
+.pulse { background: rgba(0, 242, 255, 0.05); }
+
+/* Controls */
+.btns { margin-top: 15px; display: grid; grid-template-columns: repeat(3, 60px); gap: 10px; }
+.btns button { background: #1a1f29; border: 1px solid var(--neon); color: var(--neon); padding: 12px; border-radius: 6px; font-weight: bold; }
+
+/* Win Modal */
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 100; }
+.box { text-align: center; border: 2px solid var(--success); padding: 30px; border-radius: 15px; background: #000; }
+.box button { margin-top: 20px; padding: 10px 20px; background: var(--neon); border: none; font-weight: bold; cursor: pointer; }

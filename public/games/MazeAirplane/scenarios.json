@@ -1,0 +1,52 @@
+[
+    {
+      "id": 1,
+      "theme": "Hotfix Deployment",
+      "description": "The production server is down! Trace the logs, patch the code, and redeploy immediately.",
+      "checkpoints": [
+        { "name": "Log Analysis", "x": 2, "y": 3 },
+        { "name": "Local Patch", "x": 7, "y": 1 },
+        { "name": "Prod Deploy", "x": 9, "y": 9 }
+      ]
+    },
+    {
+      "id": 2,
+      "theme": "Security Audit",
+      "description": "Perform a penetration test. Find the vulnerability, rotate the keys, and harden the firewall.",
+      "checkpoints": [
+        { "name": "Scan Ports", "x": 1, "y": 8 },
+        { "name": "Key Rotation", "x": 5, "y": 5 },
+        { "name": "Firewall Update", "x": 0, "y": 2 }
+      ]
+    },
+    {
+      "id": 3,
+      "theme": "Database Migration",
+      "description": "We are moving from SQL to NoSQL. Backup the data, map the schema, and run the migration script.",
+      "checkpoints": [
+        { "name": "Data Backup", "x": 4, "y": 0 },
+        { "name": "Schema Mapping", "x": 8, "y": 4 },
+        { "name": "Live Migration", "x": 2, "y": 7 }
+      ]
+    },
+    {
+      "id": 4,
+      "theme": "Feature Sprint",
+      "description": "The client wants a new dashboard. Finish the UI design, connect the API, and clear the QA checks.",
+      "checkpoints": [
+        { "name": "UI Design", "x": 6, "y": 2 },
+        { "name": "API Integration", "x": 3, "y": 6 },
+        { "name": "QA Approval", "x": 9, "y": 0 }
+      ]
+    },
+    {
+      "id": 5,
+      "theme": "Cloud Migration",
+      "description": "Moving on-premise servers to the cloud. Containerize the app, setup S3 buckets, and configure the Load Balancer.",
+      "checkpoints": [
+        { "name": "Dockerize App", "x": 0, "y": 9 },
+        { "name": "Storage Setup", "x": 4, "y": 4 },
+        { "name": "Load Balancing", "x": 9, "y": 5 }
+      ]
+    }
+  ]
