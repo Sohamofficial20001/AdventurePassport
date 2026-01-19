@@ -1,52 +1,102 @@
 [
-    {
-      "id": 1,
-      "theme": "Hotfix Deployment",
-      "description": "The production server is down! Trace the logs, patch the code, and redeploy immediately.",
-      "checkpoints": [
-        { "name": "Log Analysis", "x": 2, "y": 3 },
-        { "name": "Local Patch", "x": 7, "y": 1 },
-        { "name": "Prod Deploy", "x": 9, "y": 9 }
-      ]
-    },
-    {
-      "id": 2,
-      "theme": "Security Audit",
-      "description": "Perform a penetration test. Find the vulnerability, rotate the keys, and harden the firewall.",
-      "checkpoints": [
-        { "name": "Scan Ports", "x": 1, "y": 8 },
-        { "name": "Key Rotation", "x": 5, "y": 5 },
-        { "name": "Firewall Update", "x": 0, "y": 2 }
-      ]
-    },
-    {
-      "id": 3,
-      "theme": "Database Migration",
-      "description": "We are moving from SQL to NoSQL. Backup the data, map the schema, and run the migration script.",
-      "checkpoints": [
-        { "name": "Data Backup", "x": 4, "y": 0 },
-        { "name": "Schema Mapping", "x": 8, "y": 4 },
-        { "name": "Live Migration", "x": 2, "y": 7 }
-      ]
-    },
-    {
-      "id": 4,
-      "theme": "Feature Sprint",
-      "description": "The client wants a new dashboard. Finish the UI design, connect the API, and clear the QA checks.",
-      "checkpoints": [
-        { "name": "UI Design", "x": 6, "y": 2 },
-        { "name": "API Integration", "x": 3, "y": 6 },
-        { "name": "QA Approval", "x": 9, "y": 0 }
-      ]
-    },
-    {
-      "id": 5,
-      "theme": "Cloud Migration",
-      "description": "Moving on-premise servers to the cloud. Containerize the app, setup S3 buckets, and configure the Load Balancer.",
-      "checkpoints": [
-        { "name": "Dockerize App", "x": 0, "y": 9 },
-        { "name": "Storage Setup", "x": 4, "y": 4 },
-        { "name": "Load Balancing", "x": 9, "y": 5 }
-      ]
-    }
-  ]
+  {
+    "id": 1,
+    "theme": "Hotfix Deployment",
+    "description": "The production server is down! Trace the logs and redeploy a fix.",
+    "checkpoints": [
+      { "name": "Log Analysis", "x": 2, "y": 3 },
+      { "name": "Code Patch", "x": 7, "y": 1 },
+      { "name": "Prod Deploy", "x": 9, "y": 9 }
+    ]
+  },
+  {
+    "id": 2,
+    "theme": "New Feature Sprint",
+    "description": "Build a new dashboard. Finish the design and connect the API.",
+    "checkpoints": [
+      { "name": "UI Design", "x": 1, "y": 8 },
+      { "name": "API Connect", "x": 5, "y": 5 },
+      { "name": "QA Testing", "x": 0, "y": 2 }
+    ]
+  },
+  {
+    "id": 3,
+    "theme": "Security Audit",
+    "description": "Scan for vulnerabilities and rotate the encryption keys.",
+    "checkpoints": [
+      { "name": "Port Scan", "x": 4, "y": 0 },
+      { "name": "Key Rotation", "x": 8, "y": 4 },
+      { "name": "Firewall Up", "x": 2, "y": 7 }
+    ]
+  },
+  {
+    "id": 4,
+    "theme": "Database Sync",
+    "description": "Backup the current data and migrate to the new schema.",
+    "checkpoints": [
+      { "name": "Data Backup", "x": 6, "y": 2 },
+      { "name": "Map Schema", "x": 3, "y": 6 },
+      { "name": "Run Script", "x": 9, "y": 0 }
+    ]
+  },
+  {
+    "id": 5,
+    "theme": "Cloud Setup",
+    "description": "Move servers to the cloud. Setup buckets and load balancers.",
+    "checkpoints": [
+      { "name": "Containerize", "x": 0, "y": 9 },
+      { "name": "Storage S3", "x": 4, "y": 4 },
+      { "name": "Load Balancer", "x": 9, "y": 5 }
+    ]
+  },
+  {
+    "id": 6,
+    "theme": "Tech Debt Cleanup",
+    "description": "Refactor the old monolith and increase the test coverage.",
+    "checkpoints": [
+      { "name": "Identify Debt", "x": 3, "y": 2 },
+      { "name": "Refactor", "x": 8, "y": 1 },
+      { "name": "Run Tests", "x": 1, "y": 9 }
+    ]
+  },
+  {
+    "id": 7,
+    "theme": "CI/CD Pipeline",
+    "description": "Automate the build process and setup auto-deployments.",
+    "checkpoints": [
+      { "name": "Build Config", "x": 5, "y": 3 },
+      { "name": "Pipeline Run", "x": 0, "y": 6 },
+      { "name": "Auto-Deploy", "x": 7, "y": 8 }
+    ]
+  },
+  {
+    "id": 8,
+    "theme": "App Optimization",
+    "description": "The app is slow. Compress assets and split the code bundles.",
+    "checkpoints": [
+      { "name": "Audit Speed", "x": 1, "y": 4 },
+      { "name": "Asset Zip", "x": 6, "y": 7 },
+      { "name": "Bundle Split", "x": 9, "y": 2 }
+    ]
+  },
+  {
+    "id": 9,
+    "theme": "API Integration",
+    "description": "Connect to external services and write the documentation.",
+    "checkpoints": [
+      { "name": "Auth Setup", "x": 4, "y": 1 },
+      { "name": "Link Service", "x": 2, "y": 5 },
+      { "name": "Swagger Docs", "x": 8, "y": 9 }
+    ]
+  },
+  {
+    "id": 10,
+    "theme": "Developer Onboard",
+    "description": "Setup a new workstation and pull the latest codebase.",
+    "checkpoints": [
+      { "name": "Install Tools", "x": 0, "y": 0 },
+      { "name": "Repo Clone", "x": 5, "y": 2 },
+      { "name": "First Commit", "x": 9, "y": 8 }
+    ]
+  }
+]

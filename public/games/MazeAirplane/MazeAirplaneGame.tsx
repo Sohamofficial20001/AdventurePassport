@@ -1,46 +1,60 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import './maze.css';
+import '../../../src/css/maze.css';
 
 const GRID_SIZE = 10;
-const CELL_SIZE = 36; 
+const CELL_SIZE = 36;
 
 interface MazeAirplaneGameProps {
-
   onComplete: (win: boolean) => void;
-//  onFinish: (win: boolean) => void; 
-
 }
 
- export const MazeAirplaneGame: React.FC<MazeAirplaneGameProps> = ({ onFinish }) => {
-  const [maze, setMaze] = useState([]);
+export const MazeAirplaneGame: React.FC<MazeAirplaneGameProps> = ({ onComplete }) => {
+  const [maze, setMaze] = useState<any[][]>([]);
   const [player, setPlayer] = useState({ x: 0, y: 0 });
   const [targetStep, setTargetStep] = useState(0);
-  const [gameStatus, setGameStatus] = useState('playing'); 
-  const [scenarioData, setScenarioData] = useState(null);
-  const closeResult = () => {
-        onFinish(true);
-    };
+  const [gameStatus, setGameStatus] = useState<'playing' | 'won'>('playing');
+  const [scenarioData, setScenarioData] = useState<any>(null);
+  
+  // Timer States
+  const [seconds, setSeconds] = useState(0);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
 
-  const touchStart = useRef(null);
-
-  // 1. Fetch Scenario with Emergency Fallback
+  // 1. Fetch Scenario with Emergency Fallback (Project Dev Theme)
   useEffect(() => {
-    fetch('AdventurePassport/public/games/MazeAirplane/scenarios.json')
+    fetch('/games/MazeAirplane/scenarios.json')
       .then(res => res.json())
       .then(data => {
         const selected = data[Math.floor(Math.random() * data.length)];
         setScenarioData(selected);
       })
       .catch(() => {
+        // Updated Fallback to match your new Project Development theme
         setScenarioData({
-          theme: "Manual Navigation",
-          description: "ATC Link offline. Proceed to local waypoints.",
-          checkpoints: [{name: "Vect-A", x: 2, y: 2}, {name: "Vect-B", x: 7, y: 4}, {name: "Base", x: 9, y: 9}]
+          theme: "Emergency Hotfix",
+          description: "Production is down! Trace logs and redeploy.",
+          checkpoints: [
+            { name: "Log Analysis", x: 2, y: 3 },
+            { name: "Local Patch", x: 7, y: 1 },
+            { name: "Prod Deploy", x: 9, y: 9 }
+          ]
         });
       });
   }, []);
 
-  // 2. Maze Gen (DFS + Braid Logic)
+  // 2. Timer Logic
+  useEffect(() => {
+    if (gameStatus === 'playing') {
+      timerRef.current = setInterval(() => {
+        setSeconds(s => s + 1);
+      }, 1000);
+    } else {
+      if (timerRef.current) clearInterval(timerRef.current);
+    }
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, [gameStatus]);
+
+  // 3. Maze Generation (DFS + Braid Logic)
   const generateMaze = useCallback(() => {
     let grid = Array.from({ length: GRID_SIZE }, () =>
       Array.from({ length: GRID_SIZE }, () => ({
@@ -52,7 +66,7 @@ interface MazeAirplaneGameProps {
     let current = { x: 0, y: 0 };
     grid[0][0].visited = true;
 
-    const getNeighbors = (x, y, g) => {
+    const getNeighbors = (x: number, y: number, g: any[][]) => {
       const neighbors = [];
       if (y > 0 && !g[y - 1][x].visited) neighbors.push({ x, y: y - 1, dir: 'top' });
       if (x < GRID_SIZE - 1 && !g[y][x + 1].visited) neighbors.push({ x: x + 1, y, dir: 'right' });
@@ -78,7 +92,7 @@ interface MazeAirplaneGameProps {
       else break;
     }
 
-    // Punch 20 extra holes for non-linear paths
+    // Punch extra holes for air corridors
     for (let i = 0; i < 20; i++) {
       let rx = Math.floor(Math.random() * (GRID_SIZE - 1));
       let ry = Math.floor(Math.random() * (GRID_SIZE - 1));
@@ -93,8 +107,8 @@ interface MazeAirplaneGameProps {
 
   useEffect(() => { generateMaze(); }, [generateMaze]);
 
-  // 3. Movement Logic
-  const movePlayer = useCallback((direction) => {
+  // 4. Movement Logic
+  const movePlayer = useCallback((direction: string) => {
     if (gameStatus === 'won' || !scenarioData || maze.length === 0) return;
     setPlayer((prev) => {
       const cell = maze[prev.y]?.[prev.x];
@@ -108,32 +122,28 @@ interface MazeAirplaneGameProps {
     });
   }, [maze, scenarioData, gameStatus]);
 
-  // 4. Waypoint Observer
+  // 5. Waypoint Observer & Win Condition
   useEffect(() => {
     if (!scenarioData || gameStatus === 'won') return;
     const cp = scenarioData.checkpoints;
     const target = cp[targetStep];
+    
     if (player.x === target?.x && player.y === target?.y) {
       if (targetStep === cp.length - 1) {
         setTargetStep(prev => prev + 1);
-        setTimeout(() => setGameStatus('won'), 250);
+        setGameStatus('won');
+        // Notify parent component of success
+        setTimeout(() => onComplete(true), 1000);
       } else {
         setTargetStep(prev => prev + 1);
       }
     }
-  }, [player, targetStep, scenarioData, gameStatus]);
+  }, [player, targetStep, scenarioData, gameStatus, onComplete]);
 
-  //    // 4.5 Win Trigger                                                                                     │
-  //    useEffect(() => {                                                                                      │
-  //      if (gameStatus === 'won') {                                                                          │
-  //        setTimeout(() => onFinish(true), 500);                                                             │
-  //      }                                                                                                    │
-  //  }, [gameStatus, onFinish]); 
-
-  // 5. Swipe Controls
+  // 6. Swipe Controls
   useEffect(() => {
-    const start = (e) => touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-    const end = (e) => {
+    const start = (e: any) => touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    const end = (e: any) => {
       if (!touchStart.current) return;
       const dx = e.changedTouches[0].clientX - touchStart.current.x;
       const dy = e.changedTouches[0].clientY - touchStart.current.y;
@@ -148,14 +158,29 @@ interface MazeAirplaneGameProps {
     return () => { window.removeEventListener('touchstart', start); window.removeEventListener('touchend', end); };
   }, [movePlayer]);
 
+  const formatTime = (totalSeconds: number) => {
+    const mins = Math.floor(totalSeconds / 60);
+    const secs = totalSeconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
   if (!scenarioData || maze.length === 0) return <div className="loading">SYNCING RADAR...</div>;
 
   return (
-    <div className="aviation-app">
+    <div className="aviation-app"
+    style={{ 
+  backgroundColor: 'var(--bg-dark)', 
+  color: 'white', 
+  fontFamily: "'Courier New', monospace", 
+  overflow: 'hidden',
+  // minHeight: '100vh',
+  // width: '100vw'
+  }}>
       <div className="hud">
+        <div className="timer-display">TIME ELAPSED: <span>{formatTime(seconds)}</span></div>
         <h2>{scenarioData.theme.toUpperCase()}</h2>
         <div className="progress">
-          {scenarioData.checkpoints.map((_, i) => (
+          {scenarioData.checkpoints.map((_: any, i: number) => (
             <div key={i} className={`seg ${i < targetStep ? 'on' : ''}`} />
           ))}
         </div>
@@ -168,7 +193,7 @@ interface MazeAirplaneGameProps {
         {maze.map((row, y) => (
           <div key={y} className="r-row">
             {row.map((cell, x) => {
-              const cpIdx = scenarioData.checkpoints.findIndex(c => c.x === x && c.y === y);
+              const cpIdx = scenarioData.checkpoints.findIndex((c: any) => c.x === x && c.y === y);
               const isCurrent = cpIdx === targetStep;
               const isDone = cpIdx !== -1 && cpIdx < targetStep;
 
@@ -181,7 +206,6 @@ interface MazeAirplaneGameProps {
                     <div className={`wp ${isDone ? 'done' : ''}`}>
                       <span className="wp-icon">{isDone ? '✅' : '📡'}</span>
                       <span className="wp-name">{cpIdx + 1}</span> 
-                      {/* //change .name */}
                     </div>
                   )}
                 </div>
@@ -189,7 +213,7 @@ interface MazeAirplaneGameProps {
             })}
           </div>
         ))}
-        <div className="plane" style={{ top: player.y * CELL_SIZE + 4, left: player.x * CELL_SIZE + 4 }}>✈️</div>
+        <div className="plane" style={{ top: player.y * CELL_SIZE + 4, left: player.x * CELL_SIZE + 4 }}>👨‍💻</div>
       </div>
 
       <div className="btns">
@@ -199,15 +223,14 @@ interface MazeAirplaneGameProps {
         <button onClick={() => movePlayer('RIGHT')}>▶</button>
       </div>
 
-       {gameStatus === 'won' && (
+      {gameStatus === 'won' && (
         <div className="modal">
           <div className="box">
-            <h1>TOUCHDOWN! 🛬</h1>
-            <p>Flight Plan Successfully Cleared.</p>
-            <button onClick={closeResult} >Continue</button>
+            <h1>MISSION SUCCESS! 🚀</h1>
+            <p>Deployment Time: {formatTime(seconds)}</p>
           </div>
         </div>
-      )} 
+      )}
     </div>
   );
 };
