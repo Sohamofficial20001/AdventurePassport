@@ -106,7 +106,8 @@ const App: React.FC = () => {
   if (showFinalBadge) return <FinalBadge user={user} onLogout={logout} />;
 
   return (
-    <div className="min-h-screen flex flex-col items-center py-8 px-4">
+    // <div className="min-h-screen flex flex-col items-center py-8 px-4">
+    <div className="min-h-screen w-full flex flex-col bg-gray-100">
       {showCelebration && <Celebration />}
       <Passport user={user} onOpenGame={setActiveGame} onLogout={logout} />
       {activeGame && (

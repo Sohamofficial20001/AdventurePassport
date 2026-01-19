@@ -1,13 +1,7 @@
 {
-  "detail": "This SAP Astrology game reflects your daily SAP career energy and role alignment using playful scenarios inspired by real project life.",
+  "detail": "SAP Activate is a modular and agile framework designed by SAP to streamline the implementation and migration to SAP solutions such as SAP S/4HANA. It replaced the older ASAP (Accelerated SAP) and SAP Launch methodologies, providing a unified approach for cloud, on-premise, and hybrid deployments.",
   "steps": [
-    "Understand Business Needs",
-    "Analyze Current Processes",
-    "Design the Future Solution",
-    "Set Up and Configure the System",
-    "Build Custom Enhancements",
-    "Integrate with Other Systems",
-    "Test the End-to-End Solution"
+    "Discover", "Prepare", "Explore", "Realize", "Deploy","Run"
   ],
   "ui": {
     "title": "Arrange the Solution Building Process",

@@ -53,7 +53,8 @@ export const Passport: React.FC<PassportProps> = ({ user, onOpenGame, onLogout }
   );
 
   return (
-    <div className="relative max-w-2xl mx-auto">
+    // <div className="relative max-w-2xl mx-auto">
+    <div className="relative w-full max-w-2xl mx-auto px-2 sm:px-4">
       {/* Inside Passport Page */}
       <div className="bg-[#fdfaf1] rounded-lg shadow-2xl border border-gray-300 p-8 relative overflow-hidden">
         {/* Subtle Background Pattern to mimic security paper */}
@@ -64,7 +65,8 @@ export const Passport: React.FC<PassportProps> = ({ user, onOpenGame, onLogout }
           <span className="text-[10px] font-bold text-blue-900/40 tracking-[0.3em] uppercase">Official Digital Pass</span>
           <button
             onClick={onLogout}
-            className="text-[#c5a059] text-[10px] font-bold uppercase tracking-widest hover:text-amber-700 transition-colors"
+            // className="text-[#c5a059] text-[10px] font-bold uppercase tracking-widest hover:text-amber-700 transition-colors"
+            className="p-2 -mr-2 text-[#c5a059] hover:text-amber-700"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -80,6 +82,7 @@ export const Passport: React.FC<PassportProps> = ({ user, onOpenGame, onLogout }
         </div>
 
         <div className="flex gap-8 mb-8">
+          {/* <div className="flex flex-col sm:flex-row gap-6 mb-8"> */}
           {/* Passport Photo - Adjusted to 35x45mm ratio */}
           <div className="flex-shrink-0">
             <div className="w-32 h-40 bg-[#fdfaf1] flex items-center justify-center relative overflow-hidden">
@@ -132,7 +135,8 @@ export const Passport: React.FC<PassportProps> = ({ user, onOpenGame, onLogout }
           <h3 className="text-center font-bold uppercase tracking-[0.4em] text-gray-400 text-[10px] mb-4 border-y border-dashed border-gray-300 py-1">
             Visas & Endorsements
           </h3>
-          <div className="grid grid-cols-3 gap-4">
+          {/* <div className="grid grid-cols-3 gap-4"> */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
             {GAMES_DATA.map((game) => (
               <Stamp
                 key={game.id}
@@ -145,10 +149,35 @@ export const Passport: React.FC<PassportProps> = ({ user, onOpenGame, onLogout }
         </div>
 
         {/* Machine Readable Zone (MRZ) */}
-        <div className="mt-8 pt-4 border-t-2 border-gray-200 font-mono text-[11px] leading-tight tracking-[0.2em] text-gray-600 opacity-80 uppercase select-none">
-          <p>P&lt;CLOUDVoyager&lt;&lt;SAP&lt;ENTHUSIAST&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</p>
-          <p>{user.userId}7&lt;&lt;8USA9001011M&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;06</p>
+        <div className="mt-8 pt-4 border-t-2 border-gray-200 select-none">
+          <div className="mx-auto w-full max-w-full sm:max-w-full lg:max-w-[680px]">
+            <div
+              className="
+        w-full
+        font-mono
+        uppercase
+        text-gray-600
+        opacity-80
+        leading-tight
+        whitespace-nowrap
+        text-justify
+      "
+              style={{
+                fontSize: "clamp(10px, 1.2vw, 13px)",
+                letterSpacing: "0.12em",
+                fontVariantNumeric: "tabular-nums"
+              }}
+            >
+              <p className="w-full">
+                P&lt;CLOUDVOYAGER&lt;&lt;SAP&lt;ENTHUSIAST&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+              </p>
+              <p className="w-full">
+                {user.userId.toUpperCase()}7&lt;&lt;8USA9001011M&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;06
+              </p>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
   );
