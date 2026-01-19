@@ -1,5 +1,5 @@
 {
-  "detail": "This SAP Astrology game reflects your daily SAP career energy and role alignment using playful scenarios inspired by real project life.",
+  "detail": "Data: SAP Datasphere SAP HANA Cloud SAP Analytics Cloud SAP Master Data Governance SAP Business Data Cloud AI Joule (AI Copilot) SAP AI Core SAP AI Launchpad SAP Business AI SAP Knowledge Graph Cloud: SAP Business Technology Platform (BTP) SAP S/4HANA Cloud SAP SuccessFactors SAP Ariba SAP Concur SAP Fieldglass RISE with SAP / GROW with SAP.",
   "topics": [
     {
       "id": "DATA",
@@ -69,28 +69,6 @@
           "id": "o3",
           "text": "Photoshop",
           "isCorrect": false
-        }
-      ]
-    },
-    {
-      "id": "ENT",
-      "title": "Enterprise",
-      "question": "What defines an enterprise system?",
-      "options": [
-        {
-          "id": "o1",
-          "text": "Cross-department integration",
-          "isCorrect": true
-        },
-        {
-          "id": "o2",
-          "text": "Standalone usage",
-          "isCorrect": false
-        },
-        {
-          "id": "o3",
-          "text": "Centralized data",
-          "isCorrect": true
         }
       ]
     }

@@ -53,6 +53,8 @@ export const GameModal: React.FC<GameModalProps> = ({ game, currentStatus, onClo
         return foundersQuizData.detail;
       // case 'ar':
       //   return arThrowData.detail;
+      // case 'maze':
+      //   return mazeAirplane.detail;
       case 'astrology':
         return sapAstrologyData.detail;
       default:
