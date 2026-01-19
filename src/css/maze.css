@@ -4,7 +4,6 @@
   --success: #39ff14;
 }
 
-body { background: var(--bg); color: white; font-family: 'Courier New', monospace; overflow: hidden; }
 
 .aviation-app { display: flex; flex-direction: column; align-items: center; padding: 15px; }
 
@@ -49,3 +48,31 @@ body { background: var(--bg); color: white; font-family: 'Courier New', monospac
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 100; }
 .box { text-align: center; border: 2px solid var(--success); padding: 30px; border-radius: 15px; background: #000; }
 .box button { margin-top: 20px; padding: 10px 20px; background: var(--neon); border: none; font-weight: bold; cursor: pointer; }
+
+/* Timer Display Styling */
+.timer-display {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  color: #888; /* Dimmer label color */
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.timer-display span {
+  color: var(--terminal-green); /* High-contrast green for the actual numbers */
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(57, 255, 20, 0.5); /* Slight neon glow */
+  margin-left: 5px;
+}
+
+/* Modal Finish Time */
+.modal .box p {
+  font-size: 18px;
+  margin: 10px 0;
+  color: #fff;
+}
+
+.modal .box p::after {
+  content: " ⏱️"; /* Adds a small stopwatch icon to the result */
+}
