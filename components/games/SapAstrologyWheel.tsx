@@ -95,7 +95,7 @@ export const SAPAstrology: React.FC<Props> = ({ onFinish }) => {
 
         // Stop tick sound after 4000 ms
         const spinDuration = 2000;
-        const postSpinDelay = 2000; // 1 second delay
+        const postSpinDelay = 2000; // 2 second delay
         setTimeout(() => {
             tickAudio.current.pause();
         }, 4000); // <-- hard-coded tick duration
@@ -114,10 +114,6 @@ export const SAPAstrology: React.FC<Props> = ({ onFinish }) => {
         const currentSlice = Math.floor(normalizedRotation / sliceAngle);
 
         if (currentSlice !== lastTickRef.current) {
-            // This can stay if you want extra tick per slice
-            // Or you can comment it out since we now have continuous 4000ms tick
-            // tickAudio.current.currentTime = 0;
-            // tickAudio.current.play();
             lastTickRef.current = currentSlice;
         }
     };
