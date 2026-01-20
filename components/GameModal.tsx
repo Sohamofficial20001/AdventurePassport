@@ -15,7 +15,7 @@ import fastTapData from './games/data/FastTap.json';
 import errorSpotData from './games/data/ErrorSpot.json';
 import foundersQuizData from './games/data/FoundersQuiz.json';
 
-import { GuideModal } from './GuideModal'; // make sure this exists
+import { GuideModal } from './GuideModal';
 
 interface GameModalProps {
   game: GameMetadata;
