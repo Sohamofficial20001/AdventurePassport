@@ -1,6 +1,14 @@
 {
   "detail": "SAP Activate is a modular and agile framework designed by SAP to streamline the implementation and migration to SAP solutions such as SAP S/4HANA. It replaced the older ASAP (Accelerated SAP) and SAP Launch methodologies, providing a unified approach for cloud, on-premise, and hybrid deployments.",
-  "steps": [
+  "howToPlay": {
+    "objective": "Arrange ERP steps in the correct order.",
+    "steps": [
+      "Read all ERP steps carefully",
+      "Drag and drop them into the correct sequence",
+      "Submit once you are confident"
+    ],
+    "winCondition": "All steps are placed in the correct order"
+  },"steps": [
     "Discover", "Prepare", "Explore", "Realize", "Deploy","Run"
   ],
   "ui": {

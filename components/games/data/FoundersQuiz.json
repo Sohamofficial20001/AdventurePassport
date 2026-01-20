@@ -1,5 +1,14 @@
 {
   "detail": "SAP was founded on April 1, 1972, by five former IBM employees in Mannheim, Germany..",
+  "howToPlay": {
+    "objective": "Choose the best strategic decision for each business scenario.",
+    "steps": [
+      "Review the business situation",
+      "Select the most appropriate strategy",
+      "Confirm your decision"
+    ],
+    "winCondition": "All business scenarios are resolved with the optimal strategy"
+  },
   "question": "How many founders does SAP have?",
   "correctAnswer": "5",
   "ui": {

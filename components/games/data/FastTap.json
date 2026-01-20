@@ -1,5 +1,14 @@
 {
   "detail": "This SAP Astrology game reflects your daily SAP career energy and role alignment using playful scenarios inspired by real project life.",
+  "howToPlay": {
+    "objective": "Identify the correct meaning of SAP terms under time pressure.",
+    "steps": [
+      "Read the SAP term shown on screen",
+      "Select the correct definition",
+      "Proceed quickly to the next term"
+    ],
+    "winCondition": "All terms are identified correctly within the time limit"
+  },
   "name": "Fast Tap",
   "description": "Rapidly identify SAP and non-SAP terms",
   "timerSeconds": 15,

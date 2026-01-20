@@ -1,5 +1,14 @@
 {
   "detail": "This SAP Astrology game reflects your daily SAP career energy and role alignment using playful scenarios inspired by real project life.",
+  "howToPlay": {
+    "objective": "Identify the correct data source or insight based on the given scenario.",
+    "steps": [
+      "Analyze the business question",
+      "Choose the correct data source or metric",
+      "Submit your selection"
+    ],
+    "winCondition": "All scenarios are answered using the correct data source or insight"
+  },
   "ui": {
     "title": "Purchase Order Error Audit",
     "instruction": "Tap the incorrect fields in this Purchase Order",

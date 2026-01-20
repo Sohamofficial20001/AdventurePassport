@@ -1,5 +1,14 @@
 {
     "detail": "This SAP Astrology game reflects your daily SAP career energy and role alignment using playful scenarios inspired by real project life.",
+    "howToPlay": {
+        "objective": "Discover your SAP career energy for the day.",
+        "steps": [
+            "Read the career prompt",
+            "Spin or select an option",
+            "Reveal your SAP role for today"
+        ],
+        "winCondition": "Your SAP career energy is revealed"
+    },
     "questions": [
         {
             "id": "career-energy",
