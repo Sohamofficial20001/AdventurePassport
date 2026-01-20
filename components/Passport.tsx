@@ -42,7 +42,7 @@ export const Passport: React.FC<PassportProps> = ({ user, onOpenGame, onLogout }
   // -- Pagination State --
   const [page, setPage] = useState(0);
   const ITEMS_PER_PAGE = 4;
-  
+
   // Calculate total pages
   const totalPages = Math.ceil(GAMES_DATA.length / ITEMS_PER_PAGE);
 
@@ -70,7 +70,7 @@ export const Passport: React.FC<PassportProps> = ({ user, onOpenGame, onLogout }
 
   const onTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
-    
+
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
@@ -88,7 +88,7 @@ export const Passport: React.FC<PassportProps> = ({ user, onOpenGame, onLogout }
     () => generateEmailId6(user.userId),
     [user.userId]
   );
-  
+
   const issueDate = useMemo(
     () => getCurrentIssueDate(),
     []
@@ -102,16 +102,19 @@ export const Passport: React.FC<PassportProps> = ({ user, onOpenGame, onLogout }
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
 
         {/* Header / Reset Button */}
-        <div className="flex justify-between items-start mb-6 border-b border-blue-900/20 pb-2 z-10">
-          <span className="text-[10px] font-bold text-blue-900/40 tracking-[0.3em] uppercase">Official Digital Pass</span>
+        <div className="flex justify-between items-center mb-6 border-b border-blue-900/20 pb-2 z-10">
+          <span className="text-[10px] font-bold text-blue-900/40 tracking-[0.3em] uppercase">
+            Official Digital Pass
+          </span>
+
           <button
             onClick={onLogout}
-            className="p-2 -mr-2 text-[#c5a059] hover:text-amber-700"
+            className="p-1 -mr-1 flex items-center justify-center text-[#c5a059] hover:text-amber-700"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
-              className="w-5 h-5 stroke-[#c5a059]"
+              className="w-5 h-5 stroke-current"
               fill="none"
               strokeWidth={1.8}
             >
@@ -121,13 +124,14 @@ export const Passport: React.FC<PassportProps> = ({ user, onOpenGame, onLogout }
           </button>
         </div>
 
+
         {/* Identity Section (Static) */}
         <div className="flex gap-8 mb-6 z-10">
           {/* Passport Photo */}
           <div className="flex-shrink-0">
-            <div className="w-32 h-40 bg-[#fdfaf1] flex items-center justify-center relative overflow-hidden border border-gray-200 shadow-inner">
+            <div className="w-18 h-24 bg-[#fdfaf1] flex items-center justify-center relative overflow-hidden border border-gray-200 shadow-inner">
               <Avatar
-                size={100}
+                size={80}
                 name={user.userId}
                 variant="beam"
                 colors={["#F94144", "#F3722C", "#F9C74F", "#90BE6D", "#577590"]}
@@ -140,23 +144,23 @@ export const Passport: React.FC<PassportProps> = ({ user, onOpenGame, onLogout }
           <div className="flex-1 grid grid-cols-2 gap-y-4 gap-x-2">
             <div className="col-span-2">
               <label className="block text-[9px] uppercase font-bold text-blue-900/60 tracking-tighter">Name / Nom</label>
-              <span className="text-lg font-mono font-bold text-gray-800 tracking-tight uppercase">{user.name}</span>
+              <span className="text-md font-mono font-bold text-gray-800 tracking-tight uppercase">{user.name}</span>
             </div>
             <div>
-              <label className="block text-[9px] uppercase font-bold text-blue-900/60 tracking-tighter">ID Code / Code</label>
-              <span className="text-md font-mono font-bold text-gray-800 tracking-widest">{passportId}</span>
+              <label className="block text-[9px] uppercase font-bold text-blue-900/60 tracking-tighter">ID Code / Code d'identification</label>
+              <span className="text-sm font-mono font-bold text-gray-800 tracking-widest">{passportId}</span>
             </div>
             <div>
-              <label className="block text-[9px] uppercase font-bold text-blue-900/60 tracking-tighter">Nationality</label>
-              <span className="text-md font-mono font-bold text-gray-800 tracking-tight uppercase">CLOUD NATIVE</span>
+              <label className="block text-[9px] uppercase font-bold text-blue-900/60 tracking-tighter">Nationality / Nationalité</label>
+              <span className="text-sm font-mono font-bold text-gray-800 tracking-tight uppercase">CLOUD NATIVE</span>
             </div>
             <div>
-              <label className="block text-[9px] uppercase font-bold text-blue-900/60 tracking-tighter">Date of Issue</label>
-              <span className="text-md font-mono font-bold text-gray-800 tracking-tight uppercase">{issueDate}</span>
+              <label className="block text-[9px] uppercase font-bold text-blue-900/60 tracking-tighter">Date of Issue / Date de délivrance</label>
+              <span className="text-sm font-mono font-bold text-gray-800 tracking-tight uppercase">{issueDate}</span>
             </div>
             <div>
-              <label className="block text-[9px] uppercase font-bold text-blue-900/60 tracking-tighter">Authority</label>
-              <span className="text-md font-mono font-bold text-gray-800 tracking-tight uppercase">SAP BTP</span>
+              <label className="block text-[9px] uppercase font-bold text-blue-900/60 tracking-tighter">Authority / Autorité</label>
+              <span className="text-sm font-mono font-bold text-gray-800 tracking-tight uppercase">SAP BTP</span>
             </div>
           </div>
         </div>
@@ -166,15 +170,15 @@ export const Passport: React.FC<PassportProps> = ({ user, onOpenGame, onLogout }
           <h3 className="text-center font-bold uppercase tracking-[0.4em] text-gray-400 text-[10px] mb-4 border-y border-dashed border-gray-300 py-1">
             Visas & Endorsements {page + 1}/{totalPages}
           </h3>
-          
+
           {/* Stamp Grid Container with Swipe Handlers */}
-          <div 
+          <div
             className="flex-1 relative min-h-[220px]"
             onTouchStart={onTouchStart}
             onTouchMove={onTouchMove}
             onTouchEnd={onTouchEnd}
           >
-             {/* Changed to grid-cols-2 to comfortably fit 4 items. 
+            {/* Changed to grid-cols-2 to comfortably fit 4 items. 
                 Using min-h to ensure layout doesn't jump.
              */}
             <div className="grid grid-cols-2 gap-4 animate-fadeIn transition-all duration-300">
@@ -191,7 +195,7 @@ export const Passport: React.FC<PassportProps> = ({ user, onOpenGame, onLogout }
 
           {/* Navigation Controls */}
           <div className="flex items-center justify-center gap-6 mt-4 mb-2">
-            <button 
+            <button
               onClick={() => setPage(p => Math.max(0, p - 1))}
               disabled={page === 0}
               className={`p-2 rounded-full transition-colors ${page === 0 ? 'opacity-20 cursor-not-allowed' : 'hover:bg-blue-900/5 text-blue-900'}`}
@@ -205,14 +209,14 @@ export const Passport: React.FC<PassportProps> = ({ user, onOpenGame, onLogout }
             {/* Pagination Dots */}
             <div className="flex gap-2">
               {Array.from({ length: totalPages }).map((_, idx) => (
-                <div 
+                <div
                   key={idx}
                   className={`w-2 h-2 rounded-full transition-colors duration-300 ${idx === page ? 'bg-blue-900/60' : 'bg-gray-300'}`}
                 />
               ))}
             </div>
 
-            <button 
+            <button
               onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
               disabled={page === totalPages - 1}
               className={`p-2 rounded-full transition-colors ${page === totalPages - 1 ? 'opacity-20 cursor-not-allowed' : 'hover:bg-blue-900/5 text-blue-900'}`}
