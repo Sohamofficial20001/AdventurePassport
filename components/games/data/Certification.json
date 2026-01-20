@@ -1,0 +1,51 @@
+{
+  "detail": "SAP offers role-based certifications across business, technical, and industry domains to validate skills and expertise.",
+  "howToPlay": {
+    "objective": "Select a certification domain and claim a certification offer.",
+    "steps": [
+      "Choose a certification domain",
+      "Scratch a card to reveal available certification options",
+      "Select the certification you want to claim",
+      "Confirm and claim your certification offer"
+    ],
+    "winCondition": "A certification offer is successfully claimed"
+  },
+  "domains": [
+    {
+      "name": "Finance",
+      "options": [
+        "SAP S/4HANA Finance",
+        "SAP Central Finance",
+        "SAP Treasury and Risk Management",
+        "SAP Billing and Revenue Innovation Management"
+      ]
+    },
+    {
+      "name": "Manufacturing",
+      "options": [
+        "SAP S/4HANA Manufacturing",
+        "SAP Digital Manufacturing Cloud",
+        "SAP Integrated Business Planning",
+        "SAP Extended Warehouse Management"
+      ]
+    },
+    {
+      "name": "Logistics",
+      "options": [
+        "SAP S/4HANA Logistics",
+        "SAP Transportation Management",
+        "SAP Extended Warehouse Management",
+        "SAP Global Trade Services"
+      ]
+    },
+    {
+      "name": "SAP Technical",
+      "options": [
+        "SAP BTP Development",
+        "SAP ABAP Cloud",
+        "SAP Fiori Development",
+        "SAP Integration Suite"
+      ]
+    }
+  ]
+}

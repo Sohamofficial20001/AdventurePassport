@@ -1,5 +1,15 @@
 {
   "detail": "Data: SAP Datasphere SAP HANA Cloud SAP Analytics Cloud SAP Master Data Governance SAP Business Data Cloud AI Joule (AI Copilot) SAP AI Core SAP AI Launchpad SAP Business AI SAP Knowledge Graph Cloud: SAP Business Technology Platform (BTP) SAP S/4HANA Cloud SAP SuccessFactors SAP Ariba SAP Concur SAP Fieldglass RISE with SAP / GROW with SAP.",
+  "howToPlay": {
+    "objective": "Correctly identify SAP products that belong to each portfolio area.",
+    "steps": [
+      "Select a portfolio category (Data, AI, or Cloud)",
+      "Review the list of SAP products shown",
+      "Choose the products that correctly belong to the selected portfolio",
+      "Submit your selection to validate your choices"
+    ],
+    "winCondition": "All SAP products are correctly matched to their respective portfolio"
+  },
   "topics": [
     {
       "id": "DATA",

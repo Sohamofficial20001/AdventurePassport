@@ -8,6 +8,7 @@ import { FoundersQuiz } from './games/FoundersQuiz';
 import { ArThrowGame } from './games/ArThrowGame';
 import { MazeAirplaneGame } from '../public/games/MazeAirplane/MazeAirplaneGame';
 import { SAPAstrology } from './games/SapAstrologyWheel';
+import Certification from './games/Certification';
 
 import sapAstrologyData from './games/data/SAPAstrology.json';
 import erpFlowData from './games/data/ERPFlow.json';
@@ -15,6 +16,8 @@ import fastTapData from './games/data/FastTap.json';
 import errorSpotData from './games/data/ErrorSpot.json';
 import foundersQuizData from './games/data/FoundersQuiz.json';
 import mazeData from './games/data/maze.json';
+import certification from './games/data/Certification.json';
+import portfolioPicker from './games/data/ModuleMatch.json';
 
 import { GuideModal } from './GuideModal';
 
@@ -32,6 +35,9 @@ const GAME_GUIDES: Record<string, any> = {
   error: errorSpotData.howToPlay,
   quiz: foundersQuizData.howToPlay,
   astrology: sapAstrologyData.howToPlay,
+  certification: certification.howToPlay,
+  maze: mazeData.howToPlay,
+  match: portfolioPicker.howToPlay,
 };
 
 export const GameModal: React.FC<GameModalProps> = ({
@@ -74,6 +80,8 @@ export const GameModal: React.FC<GameModalProps> = ({
         return sapAstrologyData.detail;
       case 'maze':
         return mazeData.detail;
+      case 'certification':
+        return certification.detail;
       default:
         return '';
     }
@@ -97,6 +105,8 @@ export const GameModal: React.FC<GameModalProps> = ({
         return <ArThrowGame onFinish={handleFinish} />;
       case 'astrology':
         return <SAPAstrology onFinish={handleFinish} />;
+      case 'certification':
+        return <Certification onComplete={handleFinish} />;
       default:
         return null;
     }

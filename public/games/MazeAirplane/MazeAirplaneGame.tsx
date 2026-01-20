@@ -17,7 +17,7 @@ export const MazeAirplaneGame: React.FC<MazeAirplaneGameProps> = ({ onComplete }
   const [screen, setScreen] = useState<'intro' | 'game'>('intro');
   
   // Timer States
-  const [seconds, setSeconds] = useState(45);
+  const [seconds, setSeconds] = useState(60);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const touchStart = useRef<{ x: number; y: number } | null>(null);
 
@@ -180,8 +180,8 @@ export const MazeAirplaneGame: React.FC<MazeAirplaneGameProps> = ({ onComplete }
       <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white p-4 animate-fade-in">
         <div className="bg-gray-800 p-8 rounded-lg shadow-xl text-center max-w-md w-full">
           <h2 className="text-4xl font-bold mb-4 text-yellow-400">{scenarioData.theme.toUpperCase()}</h2>
-          <h3 className="text-lg mb-2 uppercase tracking-wider text-gray-400">Scenario Description:</h3>
-          <p className="text-gray-300 mb-8 leading-relaxed">{scenarioData.description}</p>
+          {/* <h3 className="text-lg mb-2 uppercase tracking-wider text-gray-400">Scenario Description:</h3> */}
+          <p className="text-mb-gray-300 mb-8 leading-relaxed">{scenarioData.description}</p>
           <button
             onClick={() => setScreen('game')}
             className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg text-xl transition duration-300 ease-in-out transform hover:scale-105"
