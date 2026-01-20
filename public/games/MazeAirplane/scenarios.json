@@ -4,9 +4,12 @@
     "theme": "Hotfix Deployment",
     "description": "The production server is down! Trace the logs and redeploy a fix.",
     "checkpoints": [
-      { "name": "Log Analysis", "x": 2, "y": 3 },
-      { "name": "Code Patch", "x": 7, "y": 1 },
-      { "name": "Prod Deploy", "x": 9, "y": 9 }
+      { "name": "Log Analysis", "x": 1, "y": 2 },
+      { "name": "Code Patch", "x": 5, "y": 1 },
+      { "name": "Run Tests", "x": 0, "y": 3 },
+      { "name": "Build Artifact", "x": 3, "y": 5 },
+      { "name": "Stage Deploy", "x": 5, "y": 4 },
+      { "name": "Prod Deploy", "x": 6, "y": 6 }
     ]
   },
   {
@@ -14,9 +17,12 @@
     "theme": "New Feature Sprint",
     "description": "Build a new dashboard. Finish the design and connect the API.",
     "checkpoints": [
-      { "name": "UI Design", "x": 1, "y": 8 },
-      { "name": "API Connect", "x": 5, "y": 5 },
-      { "name": "QA Testing", "x": 0, "y": 2 }
+      { "name": "UI Design", "x": 0, "y": 5 },
+      { "name": "Component Dev", "x": 2, "y": 4 },
+      { "name": "State Mgmt", "x": 3, "y": 1 },
+      { "name": "API Connect", "x": 3, "y": 3 },
+      { "name": "E2E Tests", "x": 1, "y": 0 },
+      { "name": "QA Testing", "x": 0, "y": 1 }
     ]
   },
   {
@@ -24,9 +30,12 @@
     "theme": "Security Audit",
     "description": "Scan for vulnerabilities and rotate the encryption keys.",
     "checkpoints": [
-      { "name": "Port Scan", "x": 4, "y": 0 },
-      { "name": "Key Rotation", "x": 8, "y": 4 },
-      { "name": "Firewall Up", "x": 2, "y": 7 }
+      { "name": "Port Scan", "x": 3, "y": 0 },
+      { "name": "Dep Audit", "x": 5, "y": 1 },
+      { "name": "Pen Test", "x": 0, "y": 2 },
+      { "name": "Key Rotation", "x": 5, "y": 3 },
+      { "name": "Update Policy", "x": 3, "y": 4 },
+      { "name": "Firewall Up", "x": 1, "y": 4 }
     ]
   },
   {
@@ -34,9 +43,12 @@
     "theme": "Database Sync",
     "description": "Backup the current data and migrate to the new schema.",
     "checkpoints": [
-      { "name": "Data Backup", "x": 6, "y": 2 },
-      { "name": "Map Schema", "x": 3, "y": 6 },
-      { "name": "Run Script", "x": 9, "y": 0 }
+      { "name": "Data Backup", "x": 4, "y": 1 },
+      { "name": "New Schema", "x": 5, "y": 0 },
+      { "name": "Map Schema", "x": 2, "y": 4 },
+      { "name": "Test Script", "x": 0, "y": 5 },
+      { "name": "Dry Run", "x": 3, "y": 3 },
+      { "name": "Run Script", "x": 6, "y": 0 }
     ]
   },
   {
@@ -44,9 +56,12 @@
     "theme": "Cloud Setup",
     "description": "Move servers to the cloud. Setup buckets and load balancers.",
     "checkpoints": [
-      { "name": "Containerize", "x": 0, "y": 9 },
-      { "name": "Storage S3", "x": 4, "y": 4 },
-      { "name": "Load Balancer", "x": 9, "y": 5 }
+      { "name": "Containerize", "x": 0, "y": 6 },
+      { "name": "Push Registry", "x": 1, "y": 4 },
+      { "name": "Storage S3", "x": 3, "y": 3 },
+      { "name": "Setup IAM", "x": 4, "y": 1 },
+      { "name": "Load Balancer", "x": 6, "y": 3 },
+      { "name": "Go Live", "x": 5, "y": 5 }
     ]
   },
   {
@@ -54,9 +69,12 @@
     "theme": "Tech Debt Cleanup",
     "description": "Refactor the old monolith and increase the test coverage.",
     "checkpoints": [
-      { "name": "Identify Debt", "x": 3, "y": 2 },
-      { "name": "Refactor", "x": 8, "y": 1 },
-      { "name": "Run Tests", "x": 1, "y": 9 }
+      { "name": "Identify Debt", "x": 2, "y": 1 },
+      { "name": "Analyze", "x": 3, "y": 0 },
+      { "name": "Refactor", "x": 5, "y": 0 },
+      { "name": "Add Tests", "x": 4, "y": 2 },
+      { "name": "Measure Perf", "x": 2, "y": 4 },
+      { "name": "Run Tests", "x": 0, "y": 6 }
     ]
   },
   {
@@ -64,9 +82,12 @@
     "theme": "CI/CD Pipeline",
     "description": "Automate the build process and setup auto-deployments.",
     "checkpoints": [
-      { "name": "Build Config", "x": 5, "y": 3 },
-      { "name": "Pipeline Run", "x": 0, "y": 6 },
-      { "name": "Auto-Deploy", "x": 7, "y": 8 }
+      { "name": "Build Config", "x": 3, "y": 2 },
+      { "name": "Linting", "x": 2, "y": 0 },
+      { "name": "Unit Tests", "x": 0, "y": 2 },
+      { "name": "Pipeline Run", "x": 0, "y": 4 },
+      { "name": "Notifications", "x": 3, "y": 5 },
+      { "name": "Auto-Deploy", "x": 5, "y": 5 }
     ]
   },
   {
@@ -74,9 +95,12 @@
     "theme": "App Optimization",
     "description": "The app is slow. Compress assets and split the code bundles.",
     "checkpoints": [
-      { "name": "Audit Speed", "x": 1, "y": 4 },
-      { "name": "Asset Zip", "x": 6, "y": 7 },
-      { "name": "Bundle Split", "x": 9, "y": 2 }
+      { "name": "Audit Speed", "x": 0, "y": 2 },
+      { "name": "Find Bottleneck", "x": 2, "y": 1 },
+      { "name": "Asset Zip", "x": 4, "y": 4 },
+      { "name": "Lazy Load", "x": 5, "y": 3 },
+      { "name": "Bundle Split", "x": 6, "y": 1 },
+      { "name": "Final Check", "x": 3, "y": 6 }
     ]
   },
   {
@@ -84,9 +108,12 @@
     "theme": "API Integration",
     "description": "Connect to external services and write the documentation.",
     "checkpoints": [
-      { "name": "Auth Setup", "x": 4, "y": 1 },
-      { "name": "Link Service", "x": 2, "y": 5 },
-      { "name": "Swagger Docs", "x": 8, "y": 9 }
+      { "name": "Auth Setup", "x": 3, "y": 0 },
+      { "name": "Get Keys", "x": 1, "y": 2 },
+      { "name": "Link Service", "x": 1, "y": 3 },
+      { "name": "Error Handling", "x": 3, "y": 4 },
+      { "name": "API Docs", "x": 5, "y": 6 },
+      { "name": "Swagger Docs", "x": 5, "y": 6 }
     ]
   },
   {
@@ -95,8 +122,11 @@
     "description": "Setup a new workstation and pull the latest codebase.",
     "checkpoints": [
       { "name": "Install Tools", "x": 0, "y": 0 },
-      { "name": "Repo Clone", "x": 5, "y": 2 },
-      { "name": "First Commit", "x": 9, "y": 8 }
+      { "name": "Set Env Vars", "x": 1, "y": 1 },
+      { "name": "Repo Clone", "x": 3, "y": 1 },
+      { "name": "Run Locally", "x": 5, "y": 3 },
+      { "name": "Pair Program", "x": 3, "y": 4 },
+      { "name": "First Commit", "x": 6, "y": 5 }
     ]
   }
 ]

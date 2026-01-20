@@ -14,6 +14,7 @@ import erpFlowData from './games/data/ERPFlow.json';
 import fastTapData from './games/data/FastTap.json';
 import errorSpotData from './games/data/ErrorSpot.json';
 import foundersQuizData from './games/data/FoundersQuiz.json';
+import mazeData from './games/data/maze.json';
 
 import { GuideModal } from './GuideModal';
 
@@ -71,6 +72,8 @@ export const GameModal: React.FC<GameModalProps> = ({
         return foundersQuizData.detail;
       case 'astrology':
         return sapAstrologyData.detail;
+      case 'maze':
+        return mazeData.detail;
       default:
         return '';
     }

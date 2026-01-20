@@ -1,68 +1,83 @@
 :root {
-  --neon: #00f2ff;
-  --bg: #0a0e14;
-  --success: #39ff14;
+  --blueprint-bg: #2a3a4a;
+  --blueprint-wall: #ffffff;
+  --blueprint-player: #ffcc00;
+  --blueprint-checkpoint: #ffffff;
+  --blueprint-hud: #c0d0e0;
 }
 
-
-.aviation-app { display: flex; flex-direction: column; align-items: center; padding: 15px; }
+.aviation-app { display: flex; flex-direction: column; align-items: center; padding: 15px; background-color: var(--blueprint-bg); }
 
 /* HUD Header */
-.hud { width: 100%; max-width: 360px; background: #151b24; padding: 15px; border: 1px solid #2a3441; border-radius: 8px; margin-bottom: 15px; text-align: center; }
+.hud { width: 100%; max-width: 360px; background: #3c4d5e; padding: 15px; border: 1px solid #5a6d7e; border-radius: 8px; margin-bottom: 15px; text-align: center; color: var(--blueprint-hud); }
 .progress { display: flex; justify-content: center; gap: 5px; margin: 10px 0; }
-.seg { width: 25px; height: 5px; background: #222; }
-.seg.on { background: var(--success); box-shadow: 0 0 8px var(--success); }
-.target-info span { color: var(--neon); font-weight: bold; }
+.seg { width: 25px; height: 5px; background: #2a3a4a; }
+.seg.on { background: var(--blueprint-player); }
+.target-info span { color: var(--blueprint-player); font-weight: bold; }
 
 /* Radar Maze */
-.radar-view { position: relative; background: #0d121b; border: 3px solid #1a1f29; }
+.radar-view { position: relative; background: #2a3a4a; border: 1px solid #5a6d7e; }
 .r-row { display: flex; }
-.r-cell { width: 36px; height: 36px; box-sizing: border-box; position: relative; z-index: 2; border: 0.1px solid rgba(255,255,255,0.03); }
+.r-cell { width: 36px; height: 36px; box-sizing: border-box; position: relative; z-index: 2; }
 
-/* Walls - Higher Z-index than labels */
-.tw { border-top: 2px solid var(--neon) !important; }
-.rw { border-right: 2px solid var(--neon) !important; }
-.bw { border-bottom: 2px solid var(--neon) !important; }
-.lw { border-left: 2px solid var(--neon) !important; }
+/* Walls - Dashed Blueprint Style */
+.tw { border-top: 2px dashed var(--blueprint-wall) !important; }
+.rw { border-right: 2px dashed var(--blueprint-wall) !important; }
+.bw { border-bottom: 2px dashed var(--blueprint-wall) !important; }
+.lw { border-left: 2px dashed var(--blueprint-wall) !important; }
 
-/* Waypoints - Behind the walls */
+/* Waypoints */
 .wp { font-size: 14px; text-align: center; line-height: 36px; z-index: 1; }
 .wp-name { 
-  position: absolute; bottom: 1px; left: 50%; transform: translateX(-50%); 
-  font-size: 14px; background: rgba(0,0,0,0.7); color: var(--neon); 
-  padding: 1px 1px; border-radius: 1px; white-space: nowrap; pointer-events: none; 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--blueprint-checkpoint);
+  color: var(--blueprint-bg);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.wp.done { opacity: 0.2; }
+.wp.done .wp-name { background-color: var(--blueprint-player); color: #000; }
 
 /* Airplane */
-.plane { position: absolute; width: 28px; height: 28px; font-size: 22px; transition: all 0.12s ease-out; z-index: 10; filter: drop-shadow(0 0 5px var(--neon)); pointer-events: none; }
+.plane { position: absolute; width: 28px; height: 28px; font-size: 22px; transition: all 0.12s ease-out; z-index: 10; pointer-events: none; }
 
 /* Pulse Animation for Current Target */
-.pulse { background: rgba(0, 242, 255, 0.05); }
+@keyframes pulse-blueprint {
+  0% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(255, 204, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0); }
+}
+.pulse .wp-name { animation: pulse-blueprint 1.5s infinite; }
 
 /* Controls */
 .btns { margin-top: 15px; display: grid; grid-template-columns: repeat(3, 60px); gap: 10px; }
-.btns button { background: #1a1f29; border: 1px solid var(--neon); color: var(--neon); padding: 12px; border-radius: 6px; font-weight: bold; }
+.btns button { background: #3c4d5e; border: 1px solid var(--blueprint-hud); color: var(--blueprint-hud); padding: 12px; border-radius: 6px; font-weight: bold; }
 
 /* Win Modal */
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 100; }
-.box { text-align: center; border: 2px solid var(--success); padding: 30px; border-radius: 15px; background: #000; }
-.box button { margin-top: 20px; padding: 10px 20px; background: var(--neon); border: none; font-weight: bold; cursor: pointer; }
+.box { text-align: center; border: 2px solid var(--blueprint-player); padding: 30px; border-radius: 15px; background: var(--blueprint-bg); }
+.box button { margin-top: 20px; padding: 10px 20px; background: var(--blueprint-player); border: none; font-weight: bold; cursor: pointer; }
 
 /* Timer Display Styling */
 .timer-display {
   font-family: 'Courier New', Courier, monospace;
   font-size: 14px;
-  color: #888; /* Dimmer label color */
+  color: var(--blueprint-hud);
   margin-bottom: 8px;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
 
 .timer-display span {
-  color: var(--terminal-green); /* High-contrast green for the actual numbers */
+  color: var(--blueprint-player);
   font-weight: bold;
-  text-shadow: 0 0 5px rgba(57, 255, 20, 0.5); /* Slight neon glow */
   margin-left: 5px;
 }
 
@@ -76,3 +91,10 @@
 .modal .box p::after {
   content: " ⏱️"; /* Adds a small stopwatch icon to the result */
 }
+
+/* Animation for fade-in */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fade-in { animation: fade-in 0.5s ease-in-out; }

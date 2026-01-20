@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import '../../../src/css/maze.css';
 
-const GRID_SIZE = 10;
+const GRID_SIZE = 7;
 const CELL_SIZE = 36;
 
 interface MazeAirplaneGameProps {
@@ -14,9 +14,10 @@ export const MazeAirplaneGame: React.FC<MazeAirplaneGameProps> = ({ onComplete }
   const [targetStep, setTargetStep] = useState(0);
   const [gameStatus, setGameStatus] = useState<'playing' | 'won'>('playing');
   const [scenarioData, setScenarioData] = useState<any>(null);
+  const [screen, setScreen] = useState<'intro' | 'game'>('intro');
   
   // Timer States
-  const [seconds, setSeconds] = useState(0);
+  const [seconds, setSeconds] = useState(45);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const touchStart = useRef<{ x: number; y: number } | null>(null);
 
@@ -34,9 +35,9 @@ export const MazeAirplaneGame: React.FC<MazeAirplaneGameProps> = ({ onComplete }
           theme: "Emergency Hotfix",
           description: "Production is down! Trace logs and redeploy.",
           checkpoints: [
-            { name: "Log Analysis", x: 2, y: 3 },
-            { name: "Local Patch", x: 7, y: 1 },
-            { name: "Prod Deploy", x: 9, y: 9 }
+            { name: "Log Analysis", x: 1, y: 2 },
+            { name: "Local Patch", x: 5, y: 1 },
+            { name: "Prod Deploy", x: 6, y: 6 }
           ]
         });
       });
@@ -44,15 +45,19 @@ export const MazeAirplaneGame: React.FC<MazeAirplaneGameProps> = ({ onComplete }
 
   // 2. Timer Logic
   useEffect(() => {
-    if (gameStatus === 'playing') {
+    if (gameStatus === 'playing' && screen === 'game') {
+      if (seconds === 0) {
+        onComplete(false);
+        return;
+      }
       timerRef.current = setInterval(() => {
-        setSeconds(s => s + 1);
+        setSeconds(s => s - 1);
       }, 1000);
     } else {
       if (timerRef.current) clearInterval(timerRef.current);
     }
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [gameStatus]);
+  }, [gameStatus, screen, seconds, onComplete]);
 
   // 3. Maze Generation (DFS + Braid Logic)
   const generateMaze = useCallback(() => {
@@ -92,7 +97,7 @@ export const MazeAirplaneGame: React.FC<MazeAirplaneGameProps> = ({ onComplete }
       else break;
     }
 
-    // Punch extra holes for air corridors
+    // Punch 10 extra holes for non-linear paths
     for (let i = 0; i < 20; i++) {
       let rx = Math.floor(Math.random() * (GRID_SIZE - 1));
       let ry = Math.floor(Math.random() * (GRID_SIZE - 1));
@@ -122,25 +127,29 @@ export const MazeAirplaneGame: React.FC<MazeAirplaneGameProps> = ({ onComplete }
     });
   }, [maze, scenarioData, gameStatus]);
 
-  // 5. Waypoint Observer & Win Condition
+  // 4. Waypoint Observer
   useEffect(() => {
     if (!scenarioData || gameStatus === 'won') return;
     const cp = scenarioData.checkpoints;
     const target = cp[targetStep];
-    
     if (player.x === target?.x && player.y === target?.y) {
       if (targetStep === cp.length - 1) {
         setTargetStep(prev => prev + 1);
-        setGameStatus('won');
-        // Notify parent component of success
-        setTimeout(() => onComplete(true), 1000);
+        setTimeout(() => setGameStatus('won'), 250);
       } else {
         setTargetStep(prev => prev + 1);
       }
     }
-  }, [player, targetStep, scenarioData, gameStatus, onComplete]);
+  }, [player, targetStep, scenarioData, gameStatus]);
 
-  // 6. Swipe Controls
+  // Win Trigger
+  useEffect(() => {
+    if (gameStatus === 'won') {
+      onComplete(true);
+    }
+  }, [gameStatus, onComplete]);
+
+  // 5. Swipe Controls
   useEffect(() => {
     const start = (e: any) => touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
     const end = (e: any) => {
@@ -166,6 +175,24 @@ export const MazeAirplaneGame: React.FC<MazeAirplaneGameProps> = ({ onComplete }
 
   if (!scenarioData || maze.length === 0) return <div className="loading">SYNCING RADAR...</div>;
 
+  if (screen === 'intro') {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white p-4 animate-fade-in">
+        <div className="bg-gray-800 p-8 rounded-lg shadow-xl text-center max-w-md w-full">
+          <h2 className="text-4xl font-bold mb-4 text-yellow-400">{scenarioData.theme.toUpperCase()}</h2>
+          <h3 className="text-lg mb-2 uppercase tracking-wider text-gray-400">Scenario Description:</h3>
+          <p className="text-gray-300 mb-8 leading-relaxed">{scenarioData.description}</p>
+          <button
+            onClick={() => setScreen('game')}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg text-xl transition duration-300 ease-in-out transform hover:scale-105"
+          >
+            Start Mission
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="aviation-app"
     style={{ 
@@ -177,7 +204,7 @@ export const MazeAirplaneGame: React.FC<MazeAirplaneGameProps> = ({ onComplete }
   // width: '100vw'
   }}>
       <div className="hud">
-        <div className="timer-display">TIME ELAPSED: <span>{formatTime(seconds)}</span></div>
+        <div className="timer-display">TIME REMAINING: <span>{formatTime(seconds)}</span></div>
         <h2>{scenarioData.theme.toUpperCase()}</h2>
         <div className="progress">
           {scenarioData.checkpoints.map((_: any, i: number) => (
