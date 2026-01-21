@@ -25,7 +25,7 @@ import { saveGameSession } from '../src/services/gameSessionService';
 interface GameModalProps {
   game: GameMetadata;
   currentStatus: GameStatus;
-  userId: string; 
+  userId: string;
   onClose: () => void;
   onComplete: (win: boolean) => void;
 }
@@ -134,7 +134,8 @@ export const GameModal: React.FC<GameModalProps> = ({
           />
         );
       case 'certification':
-        return <Certification onComplete={handleFinish} />;
+        return <Certification onComplete={(win, metadata) => handleFinish(win, metadata)} />
+      // return <Certification onComplete={handleFinish} />;
       default:
         return null;
     }

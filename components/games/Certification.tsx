@@ -4,7 +4,7 @@ import { CertificationData, CertificationDomain } from './types/Certification';
 import ScratchCard from './ScratchCard';
 
 interface CertificationProps {
-  onComplete: (win: boolean) => void;
+  onComplete: (win: boolean, metadata?: Record<string, any>) => void;
 }
 
 const domainIcons: { [key: string]: string } = {
@@ -30,20 +30,42 @@ const Certification: React.FC<CertificationProps> = ({ onComplete }) => {
     }
   }, [scratchedCard]);
 
+  // ⏱ Countdown controller
   useEffect(() => {
     if (countdown === null) return;
 
     if (countdown === 0) {
-      onComplete(true);
+      if (!selectedDomain || selectedForClaim === null) return;
+
+      const metadata = {
+        gameType: 'certification',
+        domain: selectedDomain.name,
+
+        scratched: {
+          index: scratchedCard,
+          offer: selectedDomain.options[scratchedCard!],
+        },
+
+        claimed: {
+          index: selectedForClaim,
+          offer: selectedDomain.options[selectedForClaim],
+        },
+
+        changedSelection: scratchedCard !== selectedForClaim,
+        totalOptions: selectedDomain.options.length,
+      };
+
+
+      onComplete(true, metadata);
       return;
     }
 
     const timer = setTimeout(() => {
-      setCountdown(prev => (prev !== null ? prev - 1 : null));
+      setCountdown((prev) => (prev !== null ? prev - 1 : null));
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [countdown, onComplete]);
+  }, [countdown, onComplete, selectedDomain, selectedForClaim, scratchedCard]);
 
   const handleDomainSelect = (domain: CertificationDomain) => {
     setSelectedDomain(domain);
@@ -57,9 +79,10 @@ const Certification: React.FC<CertificationProps> = ({ onComplete }) => {
   };
 
   const handleClaimOffer = () => {
-    if (selectedForClaim === null) return;
+    if (!selectedDomain || selectedForClaim === null) return;
+
     setGameCompleted(true);
-    setCountdown(4);
+    setCountdown(3); // 👈 visible for 3 seconds
   };
 
   /* ---------------- COMPLETION SCREEN ---------------- */
@@ -67,14 +90,11 @@ const Certification: React.FC<CertificationProps> = ({ onComplete }) => {
   if (gameCompleted) {
     return (
       <div className="flex flex-col items-center justify-center text-center min-h-[300px]">
-        <h2 className="text-2xl font-bold mb-3">
-          Congatulations! 
-        </h2>
+        <h2 className="text-2xl font-bold mb-3">Congratulations!</h2>
 
         <p className="mb-4">
-          You are nominated for voucher {' '}
-          <strong>{selectedDomain?.options[selectedForClaim!]}</strong>{' '}
-          .
+          You are nominated for voucher{' '}
+          <strong>{selectedDomain?.options[selectedForClaim!]}</strong>.
         </p>
 
         {countdown !== null && (
@@ -130,13 +150,13 @@ const Certification: React.FC<CertificationProps> = ({ onComplete }) => {
               <div
                 key={index}
                 onClick={() => revealed && setSelectedForClaim(index)}
-                className={`rounded-lg text-center transition-all duration-300 transform
+                className={`rounded-lg text-center transition-all duration-300
                   ${revealed ? 'cursor-pointer hover:scale-105 hover:shadow-xl' : ''}
                   ${selectedForClaim === index ? 'ring-4 ring-green-500' : ''}`}
               >
                 {revealed ? (
                   <div
-                    className={`w-full h-32 flex items-center justify-center p-2 rounded-lg
+                    className={`w-full h-32 flex items-center justify-center rounded-lg
                       ${scratchedCard === index ? 'bg-yellow-200' : 'bg-gray-200'}`}
                   >
                     <span className="font-semibold">{option}</span>
