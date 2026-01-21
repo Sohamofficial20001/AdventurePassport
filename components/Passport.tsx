@@ -39,7 +39,11 @@ export const Passport: React.FC<PassportProps> = ({
 
         {/* Background texture */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]" />
-
+        <img
+          src="/assets/sopra-steria-logo-black.png"
+          alt="Sopra Steria Logo"
+          className="absolute top-2 right-2 w-28 h-auto z-20 object-contain opacity-90 drop-shadow-md"
+        />
         {/* Header */}
         <div className="flex justify-between items-center mb-5 border-b border-blue-900/20 pb-2 z-10">
           <span className="text-[10px] font-bold text-blue-900/40 tracking-[0.3em] uppercase">

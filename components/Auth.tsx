@@ -49,6 +49,12 @@ export const Auth: React.FC<AuthProps> = ({ onLogin }) => {
         {/* leather texture overlay */}
         <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/leather.png')]" />
 
+      {/* Adjust width (w-16) as needed based on your logo's aspect ratio */}
+        <img 
+          src="/assets/sopra-steria-logo-white.png" 
+          alt="Sopra Steria Logo" 
+          className="absolute top-2 right-2 w-28 h-auto z-20 object-contain opacity-90 drop-shadow-md"
+        />
         {/* title section */}
         <div className="text-center z-10 mt-2">
           <div className="text-[#c5a059] border-2 border-[#c5a059] px-3 py-1 inline-block rounded mb-3">
@@ -64,7 +70,12 @@ export const Auth: React.FC<AuthProps> = ({ onLogin }) => {
 
         {/* emblem */}
         <div className="z-10 w-28 h-28 border-4 border-[#c5a059] rounded-full flex items-center justify-center">
-          <span className="text-5xl grayscale opacity-80">🌍</span>
+          {/* <span className="text-5xl grayscale opacity-80">🌍</span> */}
+          <img 
+            src="/assets/sap.png" 
+            alt="SAP Logo" 
+            className="w-full h-full object-contain p-4 drop-shadow-lg"
+          />
         </div>
         <p className="text-[#c5a059] text-[10px] uppercase tracking-widest opacity-60">
           SAP Voyager Program
