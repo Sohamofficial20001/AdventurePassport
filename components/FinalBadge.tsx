@@ -61,7 +61,7 @@ export const FinalBadge: React.FC<Props> = ({ user, onLogout }) => {
                     <span className="text-6xl opacity-90">🏅</span>
                 </div>
 
-                <p className="text-[#c5a059] text-[10px] uppercase tracking-widest opacity-60">
+                <p className="text-[#c5a059] text-sm uppercase tracking-widest opacity-60">
                     SAP Voyager Program
                 </p>
 

@@ -57,6 +57,15 @@ const App: React.FC = () => {
     const dbUser = await loginWithEmail(email, name);
     setUser(dbUser);
     localStorage.setItem('sap_voyager_user', JSON.stringify(dbUser));
+
+    const allGames = Object.values(dbUser.games);
+    const allWon =
+      allGames.length === GAMES_DATA.length &&
+      allGames.every((s) => s === GameStatus.WON);
+
+    if (allWon) {
+      setShowFinalBadge(true);
+    }
   };
 
   const updateProgress = (gameId: number, status: GameStatus) => {

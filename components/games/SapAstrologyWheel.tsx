@@ -70,8 +70,20 @@ export const SAPAstrology: React.FC<Props> = ({ onFinish }) => {
     const [spinning, setSpinning] = useState(false);
     const [resultIndex, setResultIndex] = useState<number | null>(null);
 
+    // 🔥 New incremental states
+    const [finalIndex, setFinalIndex] = useState<number | null>(null);
+    const [hasRetried, setHasRetried] = useState(false);
+    const [reaction, setReaction] = useState<string | null>(null);
+    const [fatePercent, setFatePercent] = useState<number | null>(null);
+
     const lastTickRef = useRef(0);
-    const tickAudio = useRef(new Audio('/sounds/wheel-spin.mp3')); // your tick sound
+    const tickAudio = useRef(new Audio('/sounds/wheel-spin.mp3'));
+
+    /* ---------- Helpers ---------- */
+
+    const generateFatePercentage = () => {
+        return Math.floor(65 + Math.random() * 36); // 65–100
+    };
 
     /* ---------- Spin Logic ---------- */
 
@@ -88,50 +100,63 @@ export const SAPAstrology: React.FC<Props> = ({ onFinish }) => {
 
         setRotation(prev => prev + baseRotation);
 
-        // Start tick sound
         tickAudio.current.currentTime = 0;
         tickAudio.current.play();
-        // tickAudio.current.loop = true;
 
-        // Stop tick sound after 4000 ms
         const spinDuration = 2000;
-        const postSpinDelay = 2000; // 2 second delay
+        const postSpinDelay = 2000;
+
         setTimeout(() => {
             tickAudio.current.pause();
-        }, 4000); // <-- hard-coded tick duration
+        }, 4000);
 
-        // Finish spin
         setTimeout(() => {
-            setResultIndex(selectedIndex); // show popup
+            setResultIndex(selectedIndex);
             setSpinning(false);
         }, spinDuration + postSpinDelay);
     };
 
-    /* ---------- Tick Sound on Slice (Optional) ---------- */
+    const retrySpin = () => {
+        if (hasRetried) return;
+        setHasRetried(true);
+        setFinalIndex(null);
+        triggerSpin(1);
+    };
+
+    const handleReaction = (id: string) => {
+        setReaction(id);
+        const percent = generateFatePercentage();
+        setFatePercent(percent);
+
+        setTimeout(() => {
+            onFinish(true);
+        }, 1500);
+    };
 
     const handleUpdate = (latest: { rotate: number }) => {
         const normalizedRotation = latest.rotate % 360;
         const currentSlice = Math.floor(normalizedRotation / sliceAngle);
-
         if (currentSlice !== lastTickRef.current) {
             lastTickRef.current = currentSlice;
         }
     };
 
-    const closeResult = () => {
-        setResultIndex(null);
-        onFinish(true);
+    const acceptFate = () => {
+        setFinalIndex(resultIndex);
     };
 
     return (
         <div className="w-full flex flex-col items-center space-y-6">
-            <p className="text-sm italic text-gray-500 text-center">{question.subtitle}</p>
+            <p className="text-sm italic text-gray-500 text-center">
+                {question.subtitle}
+            </p>
 
-            <h2 className="text-lg font-bold text-center text-gray-800">{question.title}</h2>
+            <h2 className="text-lg font-bold text-center text-gray-800">
+                {question.title}
+            </h2>
 
             {/* Wheel */}
             <div className="relative w-80 h-80 overflow-visible">
-                {/* Pointer */}
                 <svg
                     width="28"
                     height="40"
@@ -144,7 +169,6 @@ export const SAPAstrology: React.FC<Props> = ({ onFinish }) => {
                 <motion.svg
                     viewBox="0 0 300 300"
                     className="rounded-full origin-center cursor-grab active:cursor-grabbing"
-                    style={{ transformOrigin: '50% 50%' }}
                     animate={{ rotate: rotation }}
                     transition={{ duration: 4.5, ease: 'easeOut' }}
                     onUpdate={handleUpdate}
@@ -197,7 +221,7 @@ export const SAPAstrology: React.FC<Props> = ({ onFinish }) => {
                                     textAnchor="middle"
                                     dominantBaseline="middle"
                                     transform={`rotate(${mid} ${textPos.x} ${textPos.y})`}
-                                    className="text-[12px] font-bold fill-white drop-shadow-sm select-none"
+                                    className="text-[12px] font-bold fill-white select-none"
                                 >
                                     {opt.label}
                                 </text>
@@ -212,25 +236,96 @@ export const SAPAstrology: React.FC<Props> = ({ onFinish }) => {
             <button
                 onClick={() => triggerSpin(1)}
                 disabled={spinning}
-                className="px-8 py-3 bg-indigo-600 text-white rounded-xl font-bold shadow-lg hover:scale-105 active:scale-95 transition disabled:opacity-50"
+                className="px-8 py-3 bg-indigo-600 text-white rounded-xl font-bold shadow-lg hover:scale-105 transition disabled:opacity-50"
             >
                 Spin the Wheel
             </button>
 
-            {/* Result Popup */}
-            {resultIndex !== null && (
+            {/* Accept / Retry */}
+            {resultIndex !== null && finalIndex === null && (
                 <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
                     <div className="bg-white rounded-2xl p-6 max-w-sm text-center space-y-4 shadow-2xl">
-                        <h3 className="text-xl font-bold text-gray-800">
+                        <h3 className="text-xl font-bold">
                             {question.options[resultIndex].label}
                         </h3>
-                        <p className="text-gray-600 text-sm">{question.options[resultIndex].description}</p>
-                        <button
-                            onClick={closeResult}
-                            className="mt-4 px-6 py-2 bg-gray-900 text-white rounded-lg font-bold hover:scale-105 transition"
-                        >
-                            Continue
-                        </button>
+                        <p className="text-sm text-gray-600">
+                            {question.options[resultIndex].description}
+                        </p>
+
+                        <div className="flex gap-3 justify-center pt-4">
+                            <button
+                                onClick={acceptFate}
+                                className="px-5 py-2 bg-green-600 text-white rounded-lg font-bold"
+                            >
+                                Accept Fate
+                            </button>
+
+                            <button
+                                onClick={retrySpin}
+                                disabled={hasRetried}
+                                className={`px-5 py-2 rounded-lg font-bold ${hasRetried
+                                        ? 'bg-gray-300 text-gray-500'
+                                        : 'bg-amber-500 text-white'
+                                    }`}
+                            >
+                                Retry Once
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Reaction */}
+            {finalIndex !== null && !reaction && (
+                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
+                    <div className="bg-white rounded-2xl p-6 max-w-sm text-center space-y-4 shadow-2xl">
+                        <p className="text-sm text-gray-500">
+                            How do you feel about this fate?
+                        </p>
+                        <div className="flex justify-center gap-6">
+                            <div className="flex flex-col items-center">
+                                <button onClick={() => handleReaction('happy')} className="text-3xl">
+                                    😄
+                                </button>
+                                <label className="text-sm text-gray-700 mt-1">Love It</label>
+                            </div>
+
+                            <div className="flex flex-col items-center">
+                                <button onClick={() => handleReaction('neutral')} className="text-3xl">
+                                    😐
+                                </button>
+                                <label className="text-sm text-gray-700 mt-1">It's Okay</label>
+                            </div>
+
+                            <div className="flex flex-col items-center">
+                                <button onClick={() => handleReaction('curious')} className="text-3xl">
+                                    🤔
+                                </button>
+                                <label className="text-sm text-gray-700 mt-1">Interesting</label>
+                            </div>
+
+                            <div className="flex flex-col items-center">
+                                <button onClick={() => handleReaction('worried')} className="text-3xl">
+                                    😬
+                                </button>
+                                <label className="text-sm text-gray-700 mt-1">Not Sure</label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            )}
+
+            {/* Fate Percentage */}
+            {fatePercent !== null && (
+                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
+                    <div className="bg-white rounded-2xl p-6 text-center shadow-2xl animate-pulse">
+                        <p className="text-sm text-gray-500 uppercase tracking-widest">
+                            Fun Fate Alignment
+                        </p>
+                        <p className="text-4xl font-extrabold text-indigo-600 mt-2">
+                            {fatePercent}%
+                        </p>
                     </div>
                 </div>
             )}

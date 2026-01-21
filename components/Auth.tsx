@@ -77,7 +77,7 @@ export const Auth: React.FC<AuthProps> = ({ onLogin }) => {
             className="w-full h-full object-contain p-4 drop-shadow-lg"
           />
         </div>
-        <p className="text-[#c5a059] text-[10px] uppercase tracking-widest opacity-60">
+        <p className="text-[#c5a059] text-sm uppercase tracking-widest opacity-60">
           SAP Voyager Program
         </p>
 
