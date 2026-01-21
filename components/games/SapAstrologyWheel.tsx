@@ -16,7 +16,7 @@ interface Question {
 }
 
 interface Props {
-    onFinish: (win: boolean) => void;
+    onFinish: (win: boolean, metadata?: Record<string, any>) => void;
 }
 
 /* ---------- Geometry Helpers ---------- */
@@ -128,10 +128,19 @@ export const SAPAstrology: React.FC<Props> = ({ onFinish }) => {
         const percent = generateFatePercentage();
         setFatePercent(percent);
 
+        const metadata = {
+            initialRole: question.options[resultIndex!].id,
+            usedRetry: hasRetried,
+            finalRole: question.options[finalIndex!].id,
+            reaction: id,
+            fateAlignment: percent,
+        };
+
         setTimeout(() => {
-            onFinish(true);
+            onFinish(true, metadata);
         }, 1500);
     };
+
 
     const handleUpdate = (latest: { rotate: number }) => {
         const normalizedRotation = latest.rotate % 360;
@@ -264,8 +273,8 @@ export const SAPAstrology: React.FC<Props> = ({ onFinish }) => {
                                 onClick={retrySpin}
                                 disabled={hasRetried}
                                 className={`px-5 py-2 rounded-lg font-bold ${hasRetried
-                                        ? 'bg-gray-300 text-gray-500'
-                                        : 'bg-amber-500 text-white'
+                                    ? 'bg-gray-300 text-gray-500'
+                                    : 'bg-amber-500 text-white'
                                     }`}
                             >
                                 Retry Once

@@ -125,6 +125,7 @@ const App: React.FC = () => {
         <GameModal
           game={activeGame}
           currentStatus={user.games[activeGame.id]}
+          userEmail={user.userId} 
           onClose={() => setActiveGame(null)}
           onComplete={(win) =>
             updateProgress(

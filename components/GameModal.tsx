@@ -20,10 +20,12 @@ import certification from './games/data/Certification.json';
 import portfolioPicker from './games/data/ModuleMatch.json';
 
 import { GuideModal } from './GuideModal';
+import { saveGameSession } from '../src/services/gameSessionService';
 
 interface GameModalProps {
   game: GameMetadata;
   currentStatus: GameStatus;
+  userId: string; 
   onClose: () => void;
   onComplete: (win: boolean) => void;
 }
@@ -43,6 +45,7 @@ const GAME_GUIDES: Record<string, any> = {
 export const GameModal: React.FC<GameModalProps> = ({
   game,
   currentStatus,
+  userEmail,
   onClose,
   onComplete,
 }) => {
@@ -56,11 +59,32 @@ export const GameModal: React.FC<GameModalProps> = ({
     return GAME_GUIDES[game.type] ?? null;
   }, [game.type]);
 
-  const handleFinish = (won: boolean) => {
+  const handleFinish = async (
+    won: boolean,
+    metadata: Record<string, any> = {}
+  ) => {
     setIsWin(won);
     setGameState('result');
+
+    // 1️⃣ Update passport progress
     onComplete(won);
 
+    // 2️⃣ Save session (non-blocking)
+    try {
+      await saveGameSession(
+        userEmail,
+        game.id,
+        won ? 'WON' : 'PARTICIPATED',
+        {
+          gameType: game.type,
+          ...metadata,
+        }
+      );
+    } catch (err) {
+      console.warn('Game session save failed', err);
+    }
+
+    // 3️⃣ Stamp animation
     setTimeout(() => {
       setShowStamp(true);
     }, 500);
@@ -104,7 +128,11 @@ export const GameModal: React.FC<GameModalProps> = ({
       case 'ar':
         return <ArThrowGame onFinish={handleFinish} />;
       case 'astrology':
-        return <SAPAstrology onFinish={handleFinish} />;
+        return (
+          <SAPAstrology
+            onFinish={(win, metadata) => handleFinish(win, metadata)}
+          />
+        );
       case 'certification':
         return <Certification onComplete={handleFinish} />;
       default:
@@ -164,10 +192,9 @@ export const GameModal: React.FC<GameModalProps> = ({
                     <div
                       className={`
                         absolute inset-0 rounded-full border-8 animate-stamp flex flex-col items-center justify-center passport-font
-                        ${
-                          isWin
-                            ? 'border-blue-600 text-blue-600'
-                            : 'border-gray-400 text-gray-400'
+                        ${isWin
+                          ? 'border-blue-600 text-blue-600'
+                          : 'border-gray-400 text-gray-400'
                         }
                       `}
                     >
