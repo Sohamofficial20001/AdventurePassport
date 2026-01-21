@@ -9,7 +9,7 @@ export const rehydrateUser = async (
   // 1️⃣ Fetch user
   const { data: user, error } = await supabase
     .from('users')
-    .select('id, email, name')
+    .select('id, email, name, is_admin')
     .eq('email', normalizedEmail)
     .maybeSingle();
 
@@ -31,6 +31,7 @@ export const rehydrateUser = async (
   return {
     userId: user.email,
     name: user.name,
+    isAdmin: user.is_admin,
     games
   };
 };

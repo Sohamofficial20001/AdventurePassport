@@ -16,21 +16,31 @@ export const FinalBadge: React.FC<Props> = ({ user, onLogout }) => {
 
                 {/* leather texture overlay */}
                 <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/leather.png')]" />
-                <button
-                    onClick={onLogout}
-                    className="absolute top-3 right-3 text-[#c5a059] hover:text-amber-700 transition-colors"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        className="w-6 h-6 stroke-[#c5a059]"
-                        fill="none"
-                        strokeWidth={1.8}
+                <div className="absolute top-3 right-3 z-20 flex items-center gap-3">
+                    <img
+                        src="/assets/sopra-steria-logo-white.png"
+                        alt="Sopra Steria Logo"
+                        className="w-24 h-auto object-contain opacity-90 drop-shadow-md"
+                    />
+
+                    <button
+                        onClick={onLogout}
+                        className="text-[#c5a059] hover:text-amber-700 transition-colors"
+                        title="Logout"
                     >
-                        <path d="M3 12a9 9 0 1 1 9 9" />
-                        <path d="M3 12l-2 2m2-2l2 2" />
-                    </svg>
-                </button>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            className="w-6 h-6 stroke-[#c5a059]"
+                            fill="none"
+                            strokeWidth={1.8}
+                        >
+                            <path d="M3 12a9 9 0 1 1 9 9" />
+                            <path d="M3 12l-2 2m2-2l2 2" />
+                        </svg>
+                    </button>
+                </div>
+
 
 
                 {/* title section */}
@@ -60,6 +70,9 @@ export const FinalBadge: React.FC<Props> = ({ user, onLogout }) => {
                 </p>
                 <p className="text-[#c5a059]/80 text-[10px] md:text-xs tracking-wider text-center">
                     You completed all activities 😊
+                </p>
+                <p className="text-[#c5a059]/80 text-[10px] md:text-xs tracking-wider text-center">
+                    Check your email 📧
                 </p>
                 <div className="z-10 text-center w-full mb-1">
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Auth } from './components/Auth';
 import { Passport } from './components/Passport';
 import { GameModal } from './components/GameModal';
-import { UserProgress, GameStatus, GameMetadata } from './types';
+import { UserProgress, GameStatus, GameMetadata, GAMES_DATA } from './types';
 import { Celebration } from './components/Celebration';
 import { AdminDashboard } from './components/AdminDashboard';
 import { FinalBadge } from './components/FinalBadge';
@@ -36,9 +36,10 @@ const App: React.FC = () => {
         setUser(freshUser);
         localStorage.setItem('sap_voyager_user', JSON.stringify(freshUser));
 
-        const allWon = Object.values(freshUser.games).every(
-          (s) => s === GameStatus.WON
-        );
+        const allGames = Object.values(freshUser.games);
+        const allWon =
+          allGames.length === GAMES_DATA.length &&
+          allGames.every((s) => s === GameStatus.WON);
 
         if (allWon) setShowFinalBadge(true);
       } catch {
@@ -75,9 +76,10 @@ const App: React.FC = () => {
 
     upsertGameProgress(user.userId, gameId, status);
 
-    const allWon = Object.values(newUser.games).every(
-      (s) => s === GameStatus.WON
-    );
+    const allGames = Object.values(newUser.games);
+    const allWon =
+      allGames.length === GAMES_DATA.length &&
+      allGames.every((s) => s === GameStatus.WON);
 
     if (allWon) {
       setShowCelebration(true);

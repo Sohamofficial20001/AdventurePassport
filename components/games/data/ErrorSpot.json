@@ -60,6 +60,53 @@
           }
         ]
       }
+    },
+    {
+      "id": "po_duplicate_item",
+      "errors": [
+        "duplicate_item"
+      ],
+      "document": {
+        "poNumber": "45000789",
+        "vendor": "ACME Technologies",
+        "currencyShown": "$",
+        "currencyExpected": "USD",
+        "items": [
+          {
+            "id": "i1",
+            "name": "Laptop Model X",
+            "qty": "25"
+          },
+          {
+            "id": "i2",
+            "name": "Laptop Model X",
+            "qty": "25",
+            "errorId": "duplicate_item"
+          }
+        ]
+      }
+    },
+    {
+      "id": "po_uom_mismatch",
+      "errors": [
+        "uom"
+      ],
+      "document": {
+        "poNumber": "45000999",
+        "vendor": "Global Supplies Ltd",
+        "currencyShown": "€",
+        "currencyExpected": "EUR",
+        "items": [
+          {
+            "id": "i1",
+            "name": "Ethernet Cable",
+            "qty": "100",
+            "uomShown": "PCS",
+            "uomExpected": "M",
+            "errorId": "uom"
+          }
+        ]
+      }
     }
   ]
 }

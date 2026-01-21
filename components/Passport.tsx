@@ -146,17 +146,15 @@ export const Passport: React.FC<PassportProps> = ({
           </div>
         </div>
 
-        {/* MRZ */}
-        <div className="mt-6 pt-4 border-t-2 border-gray-200 select-none z-10">
-          <div
-            className="font-mono uppercase text-gray-600 opacity-80 whitespace-nowrap"
-            style={{ fontSize: 'clamp(10px, 1.2vw, 13px)', letterSpacing: '0.12em' }}
-          >
-            <p>P&lt;CLOUDVOYAGER&lt;&lt;SAP&lt;ENTHUSIAST&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</p>
-            <p>{user.userId.toUpperCase().slice(0, 20)}7&lt;&lt;8USA9001011M&lt;&lt;&lt;&lt;06</p>
+        {/* Machine Readable Zone (MRZ) */}
+        <div className="mt-4 pt-4 border-t-2 border-gray-200 select-none z-10">
+          <div className="mx-auto w-full lg:max-w-[680px]">
+            <div className="w-full font-mono uppercase text-gray-600 opacity-80 leading-tight whitespace-nowrap text-justify" style={{ fontSize: "clamp(10px, 1.2vw, 13px)", letterSpacing: "0.12em", fontVariantNumeric: "tabular-nums" }} >
+              <p className="w-full"> P&lt;CLOUDVOYAGER&lt;&lt;SAP&lt;ENTHUSIAST&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; </p>
+              <p className="w-full"> {user.userId.toUpperCase().substring(0, 20)}7&lt;&lt;8IND9001011M&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;06 </p>
+            </div>
           </div>
         </div>
-
       </div>
     </div>
   );
