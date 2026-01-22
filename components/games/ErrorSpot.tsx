@@ -10,26 +10,39 @@ const getRandomScenario = () => {
   return config.scenarios[Math.floor(Math.random() * config.scenarios.length)];
 };
 
-export const ErrorSpot: React.FC<{ onFinish: (win: boolean) => void }> = ({ onFinish }) => {
+export const ErrorSpot: React.FC<{
+  onFinish: (win: boolean, metadata?: Record<string, any>) => void;
+}> = ({ onFinish }) => {
   const scenario = useMemo(() => getRandomScenario(), []);
   const [found, setFound] = useState<string[]>([]);
   const [shakeField, setShakeField] = useState<string | null>(null);
 
   const handleSpot = (fieldId: string) => {
-    // If this is a real error
+    // Correct error
     if (scenario.errors.includes(fieldId)) {
       if (found.includes(fieldId)) return;
-      setFound(prev => [...prev, fieldId]);
+      setFound((prev) => [...prev, fieldId]);
       return;
     }
 
-    // Correct field → shake feedback
+    // Incorrect field → shake feedback
     setShakeField(fieldId);
     setTimeout(() => setShakeField(null), 350);
   };
 
   const handleSubmit = () => {
-    onFinish(found.length === scenario.errors.length);
+    const success = found.length === scenario.errors.length;
+
+    const metadata = {
+      scenarioId: scenario.id,
+      poNumber: scenario.document.poNumber,
+      totalErrors: scenario.errors.length,
+      errorsFound: found.length,
+      foundErrorIds: found,
+      missedErrorIds: scenario.errors.filter((e) => !found.includes(e)),
+    };
+
+    onFinish(success, metadata);
   };
 
   const shakeAnimation = (id: string) =>
@@ -79,8 +92,8 @@ export const ErrorSpot: React.FC<{ onFinish: (win: boolean) => void }> = ({ onFi
                   : 'bg-gray-50 border-gray-200'
               }`}
             >
-              {scenario.document.currencyShown}
-              {' '} (Expected: {scenario.document.currencyExpected})
+              {scenario.document.currencyShown} (Expected:{' '}
+              {scenario.document.currencyExpected})
             </motion.button>
           </div>
         </div>
@@ -91,7 +104,7 @@ export const ErrorSpot: React.FC<{ onFinish: (win: boolean) => void }> = ({ onFi
             Item Details
           </span>
 
-          {scenario.document.items.map(item => (
+          {scenario.document.items.map((item) => (
             <div
               key={item.id}
               className="flex justify-between py-1 bg-gray-50 px-2 rounded"
@@ -100,11 +113,11 @@ export const ErrorSpot: React.FC<{ onFinish: (win: boolean) => void }> = ({ onFi
 
               {item.errorId ? (
                 <motion.button
-                  onClick={() => handleSpot(item.errorId!)}
-                  animate={shakeAnimation(item.errorId!)}
+                  onClick={() => handleSpot(item.errorId)}
+                  animate={shakeAnimation(item.errorId)}
                   transition={{ duration: 0.3 }}
                   className={`p-1 border ${
-                    found.includes(item.errorId!)
+                    found.includes(item.errorId)
                       ? 'bg-red-100 border-red-500 text-red-700'
                       : 'bg-transparent border-transparent'
                   }`}
