@@ -10,7 +10,7 @@ import { MazeAirplaneGame } from '../public/games/MazeAirplane/MazeAirplaneGame'
 import { SAPAstrology } from './games/SapAstrologyWheel';
 import Certification from './games/Certification';
 
-import sapAstrologyData from './games/data/SAPAstrology.json';
+import sapAstrologyData from './games/data/SapAstro.json';
 import erpFlowData from './games/data/ERPFlow.json';
 import fastTapData from './games/data/FastTap.json';
 import errorSpotData from './games/data/ErrorSpot.json';

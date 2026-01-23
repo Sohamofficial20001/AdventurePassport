@@ -1,6 +1,6 @@
 import React, { useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import AstrologyData from './data/SAPAstrology.json';
+import AstrologyData from './data/SapAstro.json';
 
 interface Option {
     id: string;
