@@ -93,7 +93,7 @@ const Certification: React.FC<CertificationProps> = ({ onComplete }) => {
         <h2 className="text-2xl font-bold mb-3">Congratulations!</h2>
 
         <p className="mb-4">
-          You are nominated for voucher{' '}
+          You are nominated to win voucher for {' '} certification.
           <strong>{selectedDomain?.options[selectedForClaim!]}</strong>.
         </p>
 
