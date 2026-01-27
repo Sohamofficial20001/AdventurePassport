@@ -1,7 +1,7 @@
 {
   "name": "Module Match: SAP Portfolio Challenge",
   "description": "In this interactive game, test your knowledge of SAP's newest products and solutions by matching them to the appropriate portfolio categories: Data, AI, and Cloud. Learn about cutting-edge technologies while having fun!",
-  "detail": "Thoda sa kuch aise hi",
+  "detail": "SAP drives the intelligent enterprise by combining a unified Data fabric (Datasphere), generative Business AI (Joule), and a modular Cloud ERP foundation (S/4HANA) to optimize business processes.",
   "howToPlay": {
     "objective": "Correctly identify SAP products that belong to each portfolio area.",
     "steps": [
