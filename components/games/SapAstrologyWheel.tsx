@@ -170,7 +170,7 @@ export const SAPAstrology: React.FC<Props> = ({ onFinish }) => {
                     width="28"
                     height="40"
                     viewBox="0 0 28 40"
-                    className="absolute left-1/2 -translate-x-1/2 -top-5 z-30"
+                    className="absolute left-1/2 -translate-x-1/2 -top-7 z-30 rotate-180"
                 >
                     <path d="M14 0 L26 26 L14 20 L2 26 Z" fill="#111827" />
                 </svg>

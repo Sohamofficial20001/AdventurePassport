@@ -30,5 +30,5 @@ export const GAMES_DATA: GameMetadata[] = [
   { id: 3, title: 'SAP Astrology', description: 'SAP Astrology Wheel.', icon: '🔮', type: 'astrology' },
   { id: 4, title: 'SAP Toss', description: 'AR ball throw.', icon: '🏀', type: 'ar' },  
   { id: 5, title: 'SAP Activate Navigator', description: 'Navigate the airplane through a maze.', icon: '🧭', type: 'maze' },
-  { id: 6, title: 'SAP Certification Voucher', description: 'Choose your domain and get a voucher.', icon: '📜', type: 'certification' },
+  { id: 6, title: 'Reward Reveal', description: 'Choose your domain and get a voucher.', icon: '📜', type: 'certification' },
 ];
