@@ -1,5 +1,7 @@
 {
-  "detail": "Data: SAP Datasphere SAP HANA Cloud SAP Analytics Cloud SAP Master Data Governance SAP Business Data Cloud AI Joule (AI Copilot) SAP AI Core SAP AI Launchpad SAP Business AI SAP Knowledge Graph Cloud: SAP Business Technology Platform (BTP) SAP S/4HANA Cloud SAP SuccessFactors SAP Ariba SAP Concur SAP Fieldglass RISE with SAP / GROW with SAP.",
+  "name": "Module Match: SAP Portfolio Challenge",
+  "description": "In this interactive game, test your knowledge of SAP's newest products and solutions by matching them to the appropriate portfolio categories: Data, AI, and Cloud. Learn about cutting-edge technologies while having fun!",
+  "detail": "Thoda sa kuch aise hi",
   "howToPlay": {
     "objective": "Correctly identify SAP products that belong to each portfolio area.",
     "steps": [
@@ -13,73 +15,35 @@
   "topics": [
     {
       "id": "DATA",
-      "title": "Data",
-      "question": "Which of the following are structured data?",
+      "title": "Data & Analytics",
+      "question": "Which of these products belong to the SAP Data portfolio?",
       "options": [
-        {
-          "id": "o1",
-          "text": "CSV files",
-          "isCorrect": true
-        },
-        {
-          "id": "o2",
-          "text": "Images",
-          "isCorrect": false
-        },
-        {
-          "id": "o3",
-          "text": "Relational tables",
-          "isCorrect": true
-        },
-        {
-          "id": "o4",
-          "text": "Free-form text",
-          "isCorrect": false
-        }
+        { "id": "o1", "text": "SAP Datasphere", "isCorrect": true },
+        { "id": "o2", "text": "SAP HANA Cloud", "isCorrect": true },
+        { "id": "o3", "text": "SAP Ariba", "isCorrect": false },
+        { "id": "o4", "text": "SAP Analytics Cloud", "isCorrect": true }
       ]
     },
     {
       "id": "AI",
-      "title": "AI",
-      "question": "Which are applications of AI?",
+      "title": "Business AI",
+      "question": "Identify the official SAP AI solutions from the list below:",
       "options": [
-        {
-          "id": "o1",
-          "text": "Machine Learning",
-          "isCorrect": true
-        },
-        {
-          "id": "o2",
-          "text": "Rule-based systems",
-          "isCorrect": true
-        },
-        {
-          "id": "o3",
-          "text": "Manual data entry",
-          "isCorrect": false
-        }
+        { "id": "o1", "text": "Joule (AI Copilot)", "isCorrect": true },
+        { "id": "o2", "text": "SAP AI Core", "isCorrect": true },
+        { "id": "o3", "text": "SAP SuccessFactors", "isCorrect": false },
+        { "id": "o4", "text": "SAP Knowledge Graph", "isCorrect": true }
       ]
     },
     {
-      "id": "SAP",
-      "title": "SAP",
-      "question": "Which are SAP modules?",
+      "id": "CLOUD",
+      "title": "Cloud & ERP",
+      "question": "Which offerings are part of the SAP Cloud and Enterprise portfolio?",
       "options": [
-        {
-          "id": "o1",
-          "text": "FI",
-          "isCorrect": true
-        },
-        {
-          "id": "o2",
-          "text": "MM",
-          "isCorrect": true
-        },
-        {
-          "id": "o3",
-          "text": "Photoshop",
-          "isCorrect": false
-        }
+        { "id": "o1", "text": "SAP S/4HANA Cloud", "isCorrect": true },
+        { "id": "o2", "text": "RISE with SAP", "isCorrect": true },
+        { "id": "o3", "text": "SAP AI Launchpad", "isCorrect": false },
+        { "id": "o4", "text": "SAP Fieldglass", "isCorrect": true }
       ]
     }
   ]
