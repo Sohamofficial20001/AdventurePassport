@@ -9,7 +9,7 @@ export const ModuleMatch: React.FC<{
   onFinish: (status: { played: boolean; approved: boolean }) => void;
   initialStatus?: GameStatus;
 }> = ({ onFinish, initialStatus }) => {
-  const [activeTopicId, setActiveTopicId] = useState<string | null>(null);
+  const [activeTopicId, setActiveTopicId] = useState<string | null>(config.topics[0]?.id || null);
 
   const [selectedOptions, setSelectedOptions] = useState<Record<string, string[]>>({});
   const [checkedTopics, setCheckedTopics] = useState<Set<string>>(new Set());
@@ -123,7 +123,7 @@ export const ModuleMatch: React.FC<{
       </h2>
 
       {/* Topics */}
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-3 gap-2">
         {config.topics.map(topic => (
           <button
             key={topic.id}
