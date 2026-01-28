@@ -62,7 +62,16 @@ export const ModuleMatch: React.FC<{
 
     // ✅ topic completed
     setCompletedTopics(prev => new Set(prev).add(topic.id));
-    setActiveTopicId(null);
+    
+    // Find the next topic
+    const currentIndex = config.topics.findIndex(t => t.id === topic.id);
+    const nextTopic = config.topics[currentIndex + 1];
+
+    if (nextTopic) {
+        setActiveTopicId(nextTopic.id);
+    } else {
+        setActiveTopicId(null);
+    }
   };
 
   const showAnswers = (topicId: string) => {
@@ -200,9 +209,9 @@ export const ModuleMatch: React.FC<{
 
             <button
               onClick={() => showAnswers(activeTopic.id)}
-              className="px-4 py-2 bg-gray-200 rounded"
+              className="px-4 py-2 bg-yellow-400 font-bold rounded"
             >
-              Show Answer
+              Hint
             </button>
           </div>
 

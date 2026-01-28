@@ -35,7 +35,7 @@ export const ERPFlow: React.FC<{ onFinish: (win: boolean) => void }> = ({ onFini
   };
 
   return (
-    <div className="w-full space-y-6">
+    <div className="hw-full space-y-6">
       {/* DROP ZONE */}
       <div
         className="bg-gray-50 p-4 rounded-xl min-h-[160px] border-2 border-dashed border-gray-200 space-y-2"

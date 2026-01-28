@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import confetti from 'canvas-confetti';
 import { GameMetadata, GameStatus } from '../types';
 import { ModuleMatch } from './games/ModuleMatch';
 import { ERPFlow } from './games/ERPFlow';
@@ -88,6 +89,26 @@ export const GameModal: React.FC<GameModalProps> = ({
     setTimeout(() => {
       setShowStamp(true);
     }, 500);
+
+    if (won) {
+        const duration = 2000;
+        const end = Date.now() + duration;
+
+        const frame = () => {
+          confetti({
+            particleCount: 6,
+            spread: 80,
+            startVelocity: 40,
+            origin: { x: Math.random(), y: Math.random() - 0.2 }
+          });
+
+          if (Date.now() < end) {
+            requestAnimationFrame(frame);
+          }
+        };
+
+        frame();
+      }
   };
 
   const dynamicContent = useMemo(() => {
