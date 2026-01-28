@@ -47,7 +47,7 @@ export const Passport: React.FC<PassportProps> = ({
         {/* Header */}
         <div className="flex justify-between items-center mb-5 border-b border-blue-900/20 pb-2 z-10">
           <span className="text-[10px] font-bold text-blue-900/40 tracking-[0.3em] uppercase">
-            Official Digital Pass
+            IKO26 SAP Booth Digital Pass
           </span>
 
           <button
@@ -92,7 +92,7 @@ export const Passport: React.FC<PassportProps> = ({
 
             <div>
               <label className="block text-[9px] uppercase font-bold text-blue-900/60">
-                ID Code
+                ID Code / Code d'identification
               </label>
               <span className="text-sm font-mono font-bold tracking-widest">
                 {passportId}
@@ -101,7 +101,7 @@ export const Passport: React.FC<PassportProps> = ({
 
             <div>
               <label className="block text-[9px] uppercase font-bold text-blue-900/60">
-                Nationality
+                Nationality / Nationalité
               </label>
               <span className="text-sm font-mono font-bold uppercase">
                 Cloud Native
@@ -110,7 +110,7 @@ export const Passport: React.FC<PassportProps> = ({
 
             <div>
               <label className="block text-[9px] uppercase font-bold text-blue-900/60">
-                Date of Issue
+                Date of Issue / Date d'émission
               </label>
               <span className="text-sm font-mono font-bold uppercase">
                 {issueDate}
@@ -119,7 +119,7 @@ export const Passport: React.FC<PassportProps> = ({
 
             <div>
               <label className="block text-[9px] uppercase font-bold text-blue-900/60">
-                Authority
+                Authority / Autorité
               </label>
               <span className="text-sm font-mono font-bold uppercase">
                 SAP BTP
