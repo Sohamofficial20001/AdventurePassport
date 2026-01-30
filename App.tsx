@@ -17,6 +17,21 @@ const App: React.FC = () => {
   const [showFinalBadge, setShowFinalBadge] = useState(false);
   const [isBootstrapping, setIsBootstrapping] = useState(true);
 
+  const sendWinnerEmail = async (email: string) => {
+    try {
+      await fetch('http://localhost:4000/api/send-winner-badge', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          userId: email
+        })
+      });
+    } catch (err) {
+      console.error('Failed to send winner email', err);
+    }
+  };
+
   // 🔥 REHYDRATE ON LOAD
   useEffect(() => {
     const bootstrap = async () => {
@@ -91,6 +106,7 @@ const App: React.FC = () => {
       allGames.every((s) => s === GameStatus.WON);
 
     if (allWon) {
+      sendWinnerEmail(user.userId);
       setShowCelebration(true);
       setTimeout(() => {
         setShowCelebration(false);
@@ -125,7 +141,7 @@ const App: React.FC = () => {
         <GameModal
           game={activeGame}
           currentStatus={user.games[activeGame.id]}
-          userEmail={user.userId} 
+          userEmail={user.userId}
           onClose={() => setActiveGame(null)}
           onComplete={(win) =>
             updateProgress(
