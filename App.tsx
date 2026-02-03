@@ -18,6 +18,21 @@ const App: React.FC = () => {
   const [isBootstrapping, setIsBootstrapping] = useState(true);
   const [certificationLink, setCertificationLink] = useState<string | null>(null);
 
+  const sendWinnerEmail = async (email: string) => {
+    try {
+      await fetch('http://localhost:4000/api/send-winner-badge', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          userId: email
+        })
+      });
+    } catch (err) {
+      console.error('Failed to send winner email', err);
+    }
+  };
+
   // 🔥 REHYDRATE ON LOAD
   useEffect(() => {
     const bootstrap = async () => {
@@ -105,6 +120,7 @@ const App: React.FC = () => {
       allGames.every((s) => s === GameStatus.WON);
 
     if (allWon) {
+<<<<<<< HEAD
       // 🚀 Send final badge email
       fetch('/api/send-winner-badge', {
         method: 'POST',
@@ -116,6 +132,9 @@ const App: React.FC = () => {
         }),
       });
 
+=======
+      sendWinnerEmail(user.userId);
+>>>>>>> da4a108491ea1f5ef3a10989fa6e98c0bf740379
       setShowCelebration(true);
       setTimeout(() => {
         setShowCelebration(false);
@@ -150,7 +169,11 @@ const App: React.FC = () => {
         <GameModal
           game={activeGame}
           currentStatus={user.games[activeGame.id]}
+<<<<<<< HEAD
           userId={user.userId} 
+=======
+          userEmail={user.userId}
+>>>>>>> da4a108491ea1f5ef3a10989fa6e98c0bf740379
           onClose={() => setActiveGame(null)}
           onComplete={handleGameComplete}
         />

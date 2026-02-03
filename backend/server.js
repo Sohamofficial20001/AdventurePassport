@@ -56,10 +56,9 @@ app.post('/api/send-winner-badge', async (req, res) => {
       </div>
       `
     });
-
     res.json({ success: true });
   } catch (err) {
-    console.error(err);
+    console.error("SMTP Error Details:", err);
     res.status(500).json({ error: 'Email failed to send' });
   }
 });
