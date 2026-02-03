@@ -197,7 +197,7 @@ export const MazeAirplaneGame: React.FC<MazeAirplaneGameProps> = ({ onComplete }
 
   if (screen === 'intro') {
     return (
-      <div className="flex items-center justify-center min-h-[700px] bg-gray-900 text-white p-4 animate-fade-in">
+      <div className="flex items-center justify-center min-h-[500px] bg-gray-900 text-white p-4 animate-fade-in">
         <div className="bg-gray-800 p-8 rounded-lg shadow-xl text-center max-w-md w-full">
           <h2 className="text-4xl font-bold mb-4 text-yellow-400">{scenarioData.theme.toUpperCase()}</h2>
           <p className="text-mb-gray-300 mb-8 leading-relaxed">{scenarioData.description}</p>

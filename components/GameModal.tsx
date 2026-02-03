@@ -28,7 +28,7 @@ interface GameModalProps {
   currentStatus: GameStatus;
   userId: string;
   onClose: () => void;
-  onComplete: (win: boolean) => void;
+  onComplete: (win: boolean, metadata?: Record<string, any>) => void;
 }
 
 /** Static guide mapping (JSON-driven) */
@@ -46,7 +46,7 @@ const GAME_GUIDES: Record<string, any> = {
 export const GameModal: React.FC<GameModalProps> = ({
   game,
   currentStatus,
-  userEmail,
+  userId,
   onClose,
   onComplete,
 }) => {
@@ -68,12 +68,12 @@ export const GameModal: React.FC<GameModalProps> = ({
     setGameState('result');
 
     // 1️⃣ Update passport progress
-    onComplete(won);
+    onComplete(won, metadata);
 
     // 2️⃣ Save session (non-blocking)
     try {
       await saveGameSession(
-        userEmail,
+        userId,
         game.id,
         won ? 'WON' : 'PARTICIPATED',
         {

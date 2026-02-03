@@ -596,7 +596,7 @@
         <div id="time-val" style="color: white; font-size: 32px; font-weight: bold;">15</div>
     </div>
 
-    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false; trackingMethod: best;" vr-mode-ui="enabled: false" renderer="logarithmicDepthBuffer: true">
+    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false; trackingMethod: best;" vr-mode-ui="enabled: false" renderer="logarithmicDepthBuffer: true" ar-resizer>
         
         <a-entity id="world-root">
             <a-entity id="basket-sap" position="-1.8 -1.5 -7">
@@ -620,6 +620,20 @@
     </a-scene>
 
     <script>
+          AFRAME.registerComponent('ar-resizer', {
+            init: function () {
+                this.el.sceneEl.addEventListener('arjs-video-loaded', () => {
+                    if (this.el.sceneEl.systems.renderer.arToolkitContext.arController) {
+                        this.el.sceneEl.systems.renderer.arToolkitContext.arController.orientation = 'portrait';
+                        this.el.sceneEl.systems.renderer.arToolkitContext.arController.apply_ar_orientation();
+                    }
+                    this.el.sceneEl.resize();
+                });
+                window.addEventListener('resize', () => {
+                    this.el.sceneEl.resize();
+                });
+            }
+        });
         // --- DATA CONFIGURATION ---
         const config = {
             timerSeconds: 30,

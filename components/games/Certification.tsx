@@ -14,6 +14,24 @@ const domainIcons: { [key: string]: string } = {
   'SAP Technical': '💻',
 };
 
+const certificationLinks: { [key: string]: string } = {
+  'SAP S/4HANA Finance': 'https://learning.sap.com/certifications/sap-certified-associate-sap-s-4hana-for-financial-accounting',
+  'SAP Central Finance': 'https://learning.sap.com/products/financial-management/central-finance',
+  'SAP Treasury and Risk Management': 'https://learning.sap.com/products/financial-management/treasury',
+  'SAP Billing and Revenue Innovation Management': 'https://learning.sap.com/certifications/sap-certified-associate-sap-billing-and-revenue-innovation-mgmt-subscription-order-management',
+  'SAP S/4HANA Manufacturing': 'https://training.sap.com/course/ts421-sap-s-4hana-production-planning-and-manufacturing-i-classroom-026-in-en?',
+  'SAP Digital Manufacturing Cloud': 'https://learning.sap.com/products/supply-chain-management/digital-manufacturing',
+  'SAP Integrated Business Planning': 'https://learning.sap.com/products/supply-chain-management/integrated-business-planning',
+  'SAP Extended Warehouse Management': 'https://learning.sap.com/certifications/sap-certified-associate-extended-warehouse-management-in-sap-s-4hana',
+  'SAP S/4HANA Logistics': 'https://training.sap.com/trainingpath/Applications-Logistics+Execution+&+Warehouse+Management-SAP+S4HANA',
+  'SAP Transportation Management': 'https://learning.sap.com/certifications/sap-certified-associate-transportation-management-in-sap-s-4hana',
+  'SAP Global Trade Services': 'https://training.sap.com/course/gts100-sap-global-trade-services-overview-classroom-018-g-en',
+  'SAP BTP Development': 'https://learning.sap.com/certifications/sap-certified-professional-solution-architect-sap-btp',
+  'SAP ABAP Cloud': 'https://learning.sap.com/certifications/sap-certified-associate-back-end-developer-abap-cloud',
+  'SAP Fiori Development': 'https://learning.sap.com/certifications/sap-certified-associate-sap-fiori-application-developer-1',
+  'SAP Integration Suite': 'https://learning.sap.com/certifications/sap-certified-associate-integration-developer',
+};
+
 const Certification: React.FC<CertificationProps> = ({ onComplete }) => {
   const [selectedDomain, setSelectedDomain] = useState<CertificationDomain | null>(null);
   const [scratchedCard, setScratchedCard] = useState<number | null>(null);
@@ -36,6 +54,9 @@ const Certification: React.FC<CertificationProps> = ({ onComplete }) => {
 
     if (countdown === 0) {
       if (!selectedDomain || selectedForClaim === null) return;
+      
+      const claimedOffer = selectedDomain.options[selectedForClaim];
+      const link = certificationLinks[claimedOffer] || '#';
 
       const metadata = {
         gameType: 'certification',
@@ -48,11 +69,12 @@ const Certification: React.FC<CertificationProps> = ({ onComplete }) => {
 
         claimed: {
           index: selectedForClaim,
-          offer: selectedDomain.options[selectedForClaim],
+          offer: claimedOffer,
         },
 
         changedSelection: scratchedCard !== selectedForClaim,
         totalOptions: selectedDomain.options.length,
+        certificationLink: link,
       };
 
 

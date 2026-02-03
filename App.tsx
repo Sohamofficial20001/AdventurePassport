@@ -16,6 +16,7 @@ const App: React.FC = () => {
   const [showCelebration, setShowCelebration] = useState(false);
   const [showFinalBadge, setShowFinalBadge] = useState(false);
   const [isBootstrapping, setIsBootstrapping] = useState(true);
+  const [certificationLink, setCertificationLink] = useState<string | null>(null);
 
   // 🔥 REHYDRATE ON LOAD
   useEffect(() => {
@@ -68,6 +69,19 @@ const App: React.FC = () => {
     }
   };
 
+  const handleGameComplete = (win: boolean, metadata?: Record<string, any>) => {
+    if (!activeGame) return;
+
+    if (metadata?.certificationLink) {
+      setCertificationLink(metadata.certificationLink);
+    }
+
+    updateProgress(
+      activeGame.id,
+      win ? GameStatus.WON : GameStatus.PARTICIPATED
+    );
+  };
+
   const updateProgress = (gameId: number, status: GameStatus) => {
     if (!user) return;
 
@@ -91,6 +105,17 @@ const App: React.FC = () => {
       allGames.every((s) => s === GameStatus.WON);
 
     if (allWon) {
+      // 🚀 Send final badge email
+      fetch('/api/send-winner-badge', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          email: user.userId, // Assuming userId is the email
+          userId: user.name,
+          certificationLink: certificationLink 
+        }),
+      });
+
       setShowCelebration(true);
       setTimeout(() => {
         setShowCelebration(false);
@@ -114,7 +139,7 @@ const App: React.FC = () => {
     return <AdminDashboard onLogout={logout} />;
   }
 
-  if (showFinalBadge) return <FinalBadge user={user} onLogout={logout} />;
+  if (showFinalBadge) return <FinalBadge user={user} onLogout={logout} certificationLink={certificationLink} />;
 
   return (
     // <div className="min-h-screen flex flex-col items-center py-8 px-4">
@@ -125,14 +150,9 @@ const App: React.FC = () => {
         <GameModal
           game={activeGame}
           currentStatus={user.games[activeGame.id]}
-          userEmail={user.userId} 
+          userId={user.userId} 
           onClose={() => setActiveGame(null)}
-          onComplete={(win) =>
-            updateProgress(
-              activeGame.id,
-              win ? GameStatus.WON : GameStatus.PARTICIPATED
-            )
-          }
+          onComplete={handleGameComplete}
         />
       )}
     </div>

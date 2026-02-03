@@ -10,7 +10,7 @@ export const Auth: React.FC<AuthProps> = ({ onLogin }) => {
   const [error, setError] = useState('');
 
   const isValidEmail = (value: string) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    return /^[^\s@]+@soprasteria\.com$/.test(value);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -26,7 +26,7 @@ export const Auth: React.FC<AuthProps> = ({ onLogin }) => {
     if (isValidEmail(email)) {
       onLogin(email.trim(), trimmedUser);
     } else {
-      setError('Please enter a valid email address');
+      setError('Sign in using organization\'s email');
     }
   };
 
