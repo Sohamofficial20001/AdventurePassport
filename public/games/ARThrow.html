@@ -978,6 +978,14 @@
                 opacity: 0;
             }
         }
+
+        a-scene {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
     </style>
 </head>
 
@@ -1044,20 +1052,31 @@
     </a-scene>
 
     <script>
-          AFRAME.registerComponent('ar-resizer', {
+        AFRAME.registerComponent('ar-resizer', {
             init: function () {
-                this.el.sceneEl.addEventListener('arjs-video-loaded', () => {
-                    if (this.el.sceneEl.systems.renderer.arToolkitContext.arController) {
-                        this.el.sceneEl.systems.renderer.arToolkitContext.arController.orientation = 'portrait';
-                        this.el.sceneEl.systems.renderer.arToolkitContext.arController.apply_ar_orientation();
-                    }
-                    this.el.sceneEl.resize();
+                const sceneEl = this.el.sceneEl;
+
+                const forceResize = () => {
+                    const arController = sceneEl.systems.renderer?.arToolkitContext?.arController;
+                    if (!arController) return;
+                    
+                    arController.orientation = 'portrait';
+                    arController.apply_ar_orientation();
+                    
+                    // Force A-Frame to resize the canvas
+                    sceneEl.resize();
+                };
+
+                sceneEl.addEventListener('arjs-video-loaded', () => {
+                    forceResize();
+                    // Call it again after a delay to handle any late adjustments
+                    setTimeout(forceResize, 500);
                 });
-                window.addEventListener('resize', () => {
-                    this.el.sceneEl.resize();
-                });
+
+                window.addEventListener('resize', forceResize);
             }
         });
+
         // --- DATA CONFIGURATION ---
         const config = {
             timerSeconds: 30,
