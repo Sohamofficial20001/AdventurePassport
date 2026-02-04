@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.post('/api/send-winner-badge', async (req, res) => {
   try {
-    const { email, userId, certificationLink } = req.body;
+    const { email, userId, certificationLink, logoUrl } = req.body;
 
     if (!email) {
       return res.status(400).json({ error: 'Email is required' });
@@ -34,7 +34,8 @@ app.post('/api/send-winner-badge', async (req, res) => {
       html: `
       <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f4f8; padding: 20px; text-align: center;">
         <div style="max-width: 600px; margin: auto; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
-          <div style="background-color: #00152f; padding: 20px;">
+          <div style="background-color: #00152f; padding: 20px; text-align: center;">
+            ${logoUrl ? `<img src="${logoUrl}" alt="Kickoff Logo" style="max-width: 150px; margin-bottom: 15px;">` : ''}
             <h1 style="color: #c5a059; font-size: 24px; font-weight: bold; margin: 0; letter-spacing: 1px;">MISSION ACCOMPLISHED</h1>
           </div>
           <div style="padding: 30px 20px; color: #333; line-height: 1.5;">

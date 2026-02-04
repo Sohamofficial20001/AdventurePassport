@@ -127,7 +127,8 @@ const App: React.FC = () => {
         body: JSON.stringify({ 
           email: user.userId, // Assuming userId is the email
           userId: user.name,
-          certificationLink: certificationLink 
+          certificationLink: certificationLink,
+          logoUrl: 'https://mysapbooth.me/assets/kickoff_logo_game.png'
         }),
       });
 
