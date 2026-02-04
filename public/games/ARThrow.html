@@ -594,6 +594,14 @@
                 opacity: 0;
             }
         }
+
+        a-scene {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
     </style>
 </head>
 
@@ -1032,15 +1040,15 @@
         
         <a-entity id="world-root">
             <a-entity id="basket-sap" position="-1.8 -1.5 -7">
-                <a-cylinder color="#3498db" height="1.2" radius="0.75" open-ended="true" side="double"></a-cylinder>
-                <a-text value="SAP TERM" align="center" position="0 1.5 0" scale="2.5 2.5 2.5" color="#3498db" bold="true"></a-text>
-                <a-ring color="black" radius-inner="0.6" radius-outer="0.9" rotation="-90 0 0" position="0 -0.59 0" opacity="0.3"></a-ring>
+                <a-cylinder color="#3498db" height="1.8" radius="1.125" open-ended="true" side="double"></a-cylinder>
+                <a-text value="SAP TERM" align="center" position="0 2.25 0" scale="3.75 3.75 3.75" color="#3498db" bold="true"></a-text>
+                <a-ring color="black" radius-inner="0.9" radius-outer="1.35" rotation="-90 0 0" position="0 -0.89 0" opacity="0.3"></a-ring>
             </a-entity>
 
             <a-entity id="basket-not-sap" position="1.8 -1.5 -7">
-                <a-cylinder color="#e74c3c" height="1.2" radius="0.75" open-ended="true" side="double"></a-cylinder>
-                <a-text value="NOT SAP" align="center" position="0 1.5 0" scale="2.5 2.5 2.5" color="#e74c3c" bold="true"></a-text>
-                <a-ring color="black" radius-inner="0.6" radius-outer="0.9" rotation="-90 0 0" position="0 -0.59 0" opacity="0.3"></a-ring>
+                <a-cylinder color="#e74c3c" height="1.8" radius="1.125" open-ended="true" side="double"></a-cylinder>
+                <a-text value="NOT SAP" align="center" position="0 2.25 0" scale="3.75 3.75 3.75" color="#e74c3c" bold="true"></a-text>
+                <a-ring color="black" radius-inner="0.9" radius-outer="1.35" rotation="-90 0 0" position="0 -0.89 0" opacity="0.3"></a-ring>
             </a-entity>
         </a-entity>
 
