@@ -45,7 +45,7 @@ export const ArThrowGame: React.FC<{
 
     window.addEventListener("message", handler);
     return () => window.removeEventListener("message", handler);
-  }, [onFinish]);
+  }, []);
 
   return (
     <div className="text-center text-gray-600">

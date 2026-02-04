@@ -1136,8 +1136,10 @@
                 }, "*");
             }
 
-            alert(didWin ? "MISSION COMPLETE! Threshold Reached." : "TIME'S UP! Score: " + score);
-            window.close();
+            // Give the message a moment to send before closing the window
+            setTimeout(() => {
+                window.close();
+            }, 100);
         }
 
         // --- INTERACTION LOGIC ---
