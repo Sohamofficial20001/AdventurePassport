@@ -115,6 +115,8 @@ export const GameModal: React.FC<GameModalProps> = ({
     switch (game.type) {
       case 'flow':
         return erpFlowData.detail;
+        case 'match':
+        return portfolioPicker.detail;
       case 'tap':
         return fastTapData.detail;
       case 'error':
