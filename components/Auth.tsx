@@ -10,6 +10,7 @@ export const Auth: React.FC<AuthProps> = ({ onLogin }) => {
   const [error, setError] = useState('');
 
   const isValidEmail = (value: string) => {
+    // return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
     return /^[^\s@]+@soprasteria\.com$/.test(value);
   };
 
@@ -26,6 +27,7 @@ export const Auth: React.FC<AuthProps> = ({ onLogin }) => {
     if (isValidEmail(email)) {
       onLogin(email.trim(), trimmedUser);
     } else {
+      // setError('Enter the correct email address');
       setError('Sign in using organization\'s email');
     }
   };
@@ -111,7 +113,9 @@ export const Auth: React.FC<AuthProps> = ({ onLogin }) => {
               placeholder:text-[#c5a059]/40
               focus:outline-none"
           />
-
+          {/* <p className="text-[#c5a059] text-[10px] text-center italic opacity-80">
+            *Please use your personal account to get badge
+          </p> */}
           {error && (
             <p className="text-red-300 text-xs text-center">{error}</p>
           )}

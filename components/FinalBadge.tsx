@@ -71,9 +71,9 @@ export const FinalBadge: React.FC<Props> = ({ user, onLogout }) => {
                 <p className="text-[#c5a059]/80 text-[10px] md:text-xs tracking-wider text-center">
                     You completed all activities 😊
                 </p>
-                <p className="text-[#c5a059]/80 text-[10px] md:text-xs tracking-wider text-center">
+                {/* <p className="text-[#c5a059]/80 text-[10px] md:text-xs tracking-wider text-center">
                     Check your email 📧
-                </p>
+                </p> */}
                 <div className="z-10 text-center w-full mb-1">
 
                     <div className="text-sm text-[#c5a059] opacity-70 break-all">

@@ -41,12 +41,12 @@ app.post('/api/send-winner-badge', async (req, res) => {
             <h2 style="font-size: 20px; font-weight: 600; margin-top: 0;">Congratulations, ${userId || 'Voyager'}!</h2>
             <p style="font-size: 15px;">You've successfully completed all challenges in the <strong>SAP Voyager Program</strong>.</p>
             <div style="margin: 30px 0;">
-               <span style="font-size: 70px; filter: drop_shadow(0 4px 6px rgba(0,0,0,0.1));">🎖️</span>
+              ${logoUrl ? `<img src="${logoUrl}" alt="Achievement Logo" style="max-width: 100px; height: auto; display: block; margin: 0 auto;">` : '<span style="font-size: 70px; filter: drop_shadow(0 4px 6px rgba(0,0,0,0.1));">🎖️</span>'}
             </div>
             ${certificationLink && certificationLink !== '#' ?
-              `<a href="${certificationLink}" target="_blank" style="display: inline-block; background-color: #e67e22; color: #ffffff; padding: 12px 24px; margin-top: 10px; text-decoration: none; border-radius: 8px; font-weight: bold;">View Certification</a>`
-              : ''
-            }
+          `<a href="${certificationLink}" target="_blank" style="display: inline-block; background-color: #e67e22; color: #ffffff; padding: 12px 24px; margin-top: 10px; text-decoration: none; border-radius: 8px; font-weight: bold;">View Certification</a>`
+          : ''
+        }
             <p style="font-size: 13px; color: #666; margin-top: 25px;">Thank you for participating in the Sopra Steria India Management Kick-Off 2026.</p>
           </div>
           <div style="background-color: #f0f4f8; padding: 15px; font-size: 11px; color: #888;">

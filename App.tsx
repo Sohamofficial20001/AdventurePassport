@@ -18,20 +18,20 @@ const App: React.FC = () => {
   const [isBootstrapping, setIsBootstrapping] = useState(true);
   const [certificationLink, setCertificationLink] = useState<string | null>(null);
 
-  const sendWinnerEmail = async (email: string) => {
-    try {
-      await fetch('http://localhost:4000/api/send-winner-badge', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email,
-          userId: email
-        })
-      });
-    } catch (err) {
-      console.error('Failed to send winner email', err);
-    }
-  };
+  // const sendWinnerEmail = async (email: string) => {
+  //   try {
+  //     await fetch('http://localhost:4000/api/send-winner-badge', {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify({
+  //         email,
+  //         userId: email
+  //       })
+  //     });
+  //   } catch (err) {
+  //     console.error('Failed to send winner email', err);
+  //   }
+  // };
 
   // 🔥 REHYDRATE ON LOAD
   useEffect(() => {
@@ -121,16 +121,16 @@ const App: React.FC = () => {
 
     if (allWon) {
       // 🚀 Send final badge email
-      fetch('/api/send-winner-badge', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          email: user.userId, // Assuming userId is the email
-          userId: user.name,
-          certificationLink: certificationLink,
-          logoUrl: 'https://mysapbooth.me/assets/kickoff_logo_game.png'
-        }),
-      });
+      // fetch('/api/send-winner-badge', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ 
+      //     email: user.userId, // Assuming userId is the email
+      //     userId: user.name,
+      //     certificationLink: certificationLink,
+      //     logoUrl: 'https://mysapbooth.me/assets/kickoff_logo_game.png'
+      //   }),
+      // });
 
       setShowCelebration(true);
       setTimeout(() => {
